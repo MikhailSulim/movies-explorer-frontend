@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Routes>
+        {/*отображается страница «О проекте»*/} 
+        <Route path="/" element={<></>} />
+
+        {/*отображается страница «Фильмы»*/}
+        <Route path='/movies' element={<></>} />
+
+        {/*отображается страница «Сохранённые фильмы»*/}
+        <Route path='/saved-movies' element={<></>} />
+
+        {/*отображается страница с профилем пользователя*/}
+        <Route path='/profile' element={<></>} /> 
+
+        {/*отображается страница авторизации*/}
+        <Route path='/signin' /> 
+
+        {/*отображается страница регистрации*/}
+        <Route path='/signup' /> 
+        
+        {/*Защищать маршруты авторизацией пока не требуется. Достаточно наладить
+        работу всех ссылок: нажатие на логотип ведёт на страницу «О проекте»;
+        нажатие на «Фильмы» — на роут /movies; нажатие на «Сохранённые фильмы» —
+        на роут /saved-movies; нажатие на «Регистрация», «Авторизация»,
+        «Аккаунт» — на соответствующие роуты /signup, /signin и /profile.*/}
+      </Routes>
     </div>
   );
 }
