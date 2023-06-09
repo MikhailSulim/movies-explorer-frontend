@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from '../Header/Header';
 import Promo from '../Promo/Promo';
+import AboutProject from '../AboutProject/AboutProject';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             <>
               <Header />
               <Promo />
+              <AboutProject/>
             </>
           }
         />
