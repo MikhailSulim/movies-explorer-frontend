@@ -1,0 +1,23 @@
+.header {
+  max-width: 1280px;
+  min-width: 320px;
+  height: 74px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0px auto;
+  box-sizing: border-box;
+  padding: 0 70px;
+  background-color: transparent;
+  z-index: 1;
+}
+
+.header__logo {
+  background-image: url('../../images/header_logo.svg');
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  width: 38px;
+  height: 38px;
+}
