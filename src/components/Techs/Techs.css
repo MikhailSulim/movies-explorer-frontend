@@ -7,6 +7,7 @@
   color: #fff;
   display: flex;
   flex-direction: column;
+  background-color: #272727;
 }
 
 .techs__title {
