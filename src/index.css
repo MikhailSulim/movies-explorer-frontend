@@ -1,10 +1,18 @@
 @import url('./vendor/normalize.css');
+@import url('./vendor/fonts/inter.css');
 
 /* * {
   outline: red 1px solid;
 } */
 
-@import url('./vendor/fonts/inter.css');
+/* body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+} */
 
 @import url('./components/App/App.css');
 
@@ -21,3 +29,5 @@
 @import url('./components/Portfolio/Portfolio.css');
 
 @import url('./components/Footer/Footer.css');
+
+

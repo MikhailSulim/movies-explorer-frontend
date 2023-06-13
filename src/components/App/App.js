@@ -1,14 +1,19 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Header from '../Header/Header';
+// import Header from '../Header/Header';
 import Promo from '../Promo/Promo';
 import AboutProject from '../AboutProject/AboutProject';
 import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
+import { useState } from 'react';
+
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  // setIsLoggedIn(true);
   return (
     <div className="app">
       <Routes>
@@ -17,8 +22,8 @@ function App() {
           path="/"
           element={
             <>
-              <Header />
-              <Promo />
+              {/* <Header isLogged={isLoggedIn}/> */}
+              <Promo isLogged={isLoggedIn}/>
               <AboutProject/>
               <Techs/>
               <AboutMe/>

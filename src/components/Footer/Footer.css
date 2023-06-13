@@ -1,17 +1,24 @@
 .footer {
   width: 100%;
-  font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   display: flex;
   flex-direction: column;
   background-color: #202020;
 }
 
-.footer__title {
-  padding-top: 79px;
-  max-width: 1140px;
+.footer__content {
+  max-width: 1280px;
+  min-width: 320px;
   width: 100%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 79px 70px 20px 70px;
+}
+
+.footer__title {
+  width: 100%;
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
@@ -19,6 +26,7 @@
   padding-bottom: 20px;
   text-align: center;
   border-bottom: 1px solid #424242;
+  margin: 0 0 20px 0;
 }
 
 .footer__info {
@@ -26,11 +34,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
-  max-width: 1140px;
   width: 100%;
-  margin: 0 auto;
-
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
