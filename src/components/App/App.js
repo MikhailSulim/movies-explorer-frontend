@@ -8,6 +8,13 @@ import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
 import { useState } from 'react';
+import Profile from '../Profile/Profile';
+import Login from '../Login/Login';
+import NotFound from '../NotFound/NotFound';
+import Register from '../Register/Register';
+import Main from '../Main/Main';
+import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
 
 
 function App() {
@@ -22,13 +29,19 @@ function App() {
           path="/"
           element={
             <>
-              {/* <Header isLogged={isLoggedIn}/> */}
-              <Promo isLogged={isLoggedIn}/>
+              {/* <Promo isLogged={isLoggedIn}/>
               <AboutProject/>
               <Techs/>
               <AboutMe/>
               <Portfolio/>
-              <Footer/>
+              <Footer/> */}
+              {/* <Profile isLogged={isLoggedIn}/> */}
+              {/* <Login/> */}
+              {/* <NotFound/> */}
+              {/* <Register/> */}
+              {/* <Main/> */}
+              {/* <Movies/> */}
+              <SavedMovies/>
             </>
           }
         />

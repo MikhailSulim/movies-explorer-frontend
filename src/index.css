@@ -5,15 +5,6 @@
   outline: red 1px solid;
 } */
 
-/* body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', Arial, sans-serif;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-} */
-
 @import url('./components/App/App.css');
 
 @import url('./components/Header/Header.css');
@@ -30,4 +21,20 @@
 
 @import url('./components/Footer/Footer.css');
 
+@import url('./components/Profile/Profile.css');
 
+@import url('./components/Login/Login.css');
+
+@import url('./components/NotFound/NotFound.css');
+
+@import url('./components/Register/Register.css');
+
+@import url('./components/Movies/Movies.css');
+
+@import url('./components/FilterCheckbox/FilterCheckbox.css');
+
+@import url('./components/SearchForm/SearchForm.css');
+
+@import url('./components/MoviesCard/MoviesCard.css');
+
+@import url('./components/MoviesCardList/MoviesCardList.css');
