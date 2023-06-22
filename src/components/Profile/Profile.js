@@ -1,3 +1,4 @@
+import "./Profile.css";
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 
@@ -24,7 +25,7 @@ function Profile({ isLogged }) {
               defaultValue={'pochta@yandex.ru'}
             />
           </label>
-          <button type="submit" className="profile__button">
+          <button type="submit" className="profile__button profile__button_edit">
             Редактировать
           </button>
         </form>

@@ -1,4 +1,5 @@
 import author_photo from '../../images/author_photo.jpg';
+import "./AboutMe.css"; 
 
 function AboutMe() {
   return (

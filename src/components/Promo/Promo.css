@@ -57,6 +57,7 @@
   background-color: transparent;
   padding: 0;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 .promo__button:hover {
@@ -64,7 +65,6 @@
   color: #000;
   opacity: 1;
   border: none;
-  transition: opacity 0.3s ease-in-out;
 }
 
 .promo__img {

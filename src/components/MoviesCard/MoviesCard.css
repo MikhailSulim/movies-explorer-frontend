@@ -49,6 +49,11 @@
   height: 30px;
   background-repeat: no-repeat;
   cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.movie__choice:hover {
+  opacity: 0.6;
 }
 
 .movie__checked {

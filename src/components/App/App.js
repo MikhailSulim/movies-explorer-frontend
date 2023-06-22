@@ -1,26 +1,18 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-// import Header from '../Header/Header';
-import Promo from '../Promo/Promo';
-import AboutProject from '../AboutProject/AboutProject';
-import Techs from '../Techs/Techs';
-import AboutMe from '../AboutMe/AboutMe';
-import Portfolio from '../Portfolio/Portfolio';
-import Footer from '../Footer/Footer';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
-import NotFound from '../NotFound/NotFound';
 import Register from '../Register/Register';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
-
+import Preloader from '../Preloader/Preloader';
+import NotFound from '../NotFound/NotFound';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
-  // setIsLoggedIn(true);
   return (
     <div className="app">
       <Routes>
@@ -29,37 +21,41 @@ function App() {
           path="/"
           element={
             <>
-              {/* <Promo isLogged={isLoggedIn}/>
-              <AboutProject/>
-              <Techs/>
-              <AboutMe/>
-              <Portfolio/>
-              <Footer/> */}
               {/* <Profile isLogged={isLoggedIn}/> */}
               {/* <Login/> */}
               {/* <NotFound/> */}
               {/* <Register/> */}
-              {/* <Main/> */}
+              <Main />
               {/* <Movies/> */}
-              <SavedMovies/>
+              {/* <SavedMovies/> */}
+              {/* <Preloader /> */}
             </>
           }
         />
 
         {/*отображается страница «Фильмы»*/}
-        <Route path="/movies" element={<></>} />
+        <Route
+          path="/movies"
+          element={
+            <>
+              <Movies />{' '}
+            </>
+          }
+        />
 
         {/*отображается страница «Сохранённые фильмы»*/}
-        <Route path="/saved-movies" element={<></>} />
+        <Route path="/saved-movies" element={<SavedMovies />} />
 
         {/*отображается страница с профилем пользователя*/}
-        <Route path="/profile" element={<></>} />
+        <Route path="/profile" element={<Profile isLogged={isLoggedIn} />} />
 
         {/*отображается страница авторизации*/}
-        <Route path="/signin" />
+        <Route path="/signin" element={<Login />} />
 
         {/*отображается страница регистрации*/}
-        <Route path="/signup" />
+        <Route path="/signup" element={<Register />} />
+
+        <Route path="*" element={<NotFound />} />
 
         {/*Защищать маршруты авторизацией пока не требуется. Достаточно наладить
         работу всех ссылок: нажатие на логотип ведёт на страницу «О проекте»;

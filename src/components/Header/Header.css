@@ -20,16 +20,6 @@
   align-items: center;
 }
 
-.header__logo {
-  background-image: url('../../images/header_logo.svg');
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  width: 38px;
-  height: 38px;
-  margin: 0 44px 0 0;
-  padding: 0;
-}
 
 .header__btn_signup {
   cursor: pointer;
@@ -41,6 +31,11 @@
   background-color: transparent;
   border: none;
   margin-right: 30px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.header__btn_signup:hover {
+  opacity: 0.6;
 }
 
 .header__btn_signin {
@@ -55,31 +50,11 @@
   color: #000;
   width: 76px;
   height: 32px;
+  transition: opacity 0.3s ease-in-out;
 }
 
-.header__btn_movies {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 13px;
-  line-height: 18px;
-  color: #fff;
-  margin-right: 16px;
-  background-color: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-
-.header__btn_saved-movies {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 18px;
-  color: #fff;
-  background-color: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
+.header__btn_signin:hover {
+  opacity: 0.6;
 }
 
 .header__btn_account {
@@ -97,6 +72,12 @@
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.header__btn_account:hover {
+  background-color: #3ddc84;
 }
 
 .header__nav-movies {

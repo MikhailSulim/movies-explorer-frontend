@@ -1,25 +1,28 @@
-import header_logo from '../../images/header_logo.svg';
+import './Login.css';
 import { Link } from 'react-router-dom';
+import Input from '../Input/Input';
+import Logo from '../Logo/Logo';
 
 function Login() {
   return (
     <section className="login">
       <div className="login__container">
-        <img className="header__logo" src={header_logo} alt="логотип проекта" />
+        <Logo />
         <h1 className="login__title">Рады видеть!</h1>
         <form className="login__form">
-          <span className="login__text-input">E-mail</span>
-          <input
-            className="login__input login__input_email"
-            defaultValue={'pochta@yandex.ru'}
-            type="text"
+          <Input
+            name="email"
+            label="E-mail"
+            isValid={true}
+            type="email"
+            error=""
           />
-
-          <span className="login__text-input">Пароль</span>
-          <input
-            className="login__input login__input_password"
-            defaultValue={'pqssword'}
+          <Input
+            name="password"
+            label="Пароль"
+            isValid={true}
             type="password"
+            error=""
           />
 
           <button className="login__button">Войти</button>

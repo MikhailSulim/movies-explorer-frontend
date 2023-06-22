@@ -31,6 +31,10 @@
   color: #8b8b8b;
 }
 
+.search__input:focus {
+  outline: solid 2px #3ddc84;
+}
+
 .search__button {
   width: 70px;
   height: 44px;
@@ -45,4 +49,9 @@
   color: #fff;
   border: none;
   cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.search__button:hover {
+  transform: scale(1.1);
 }

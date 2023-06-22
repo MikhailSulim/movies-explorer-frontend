@@ -1,9 +1,11 @@
+import './Promo.css';
 import Header from '../Header/Header';
+import { Link } from 'react-router-dom';
 
-function Promo({isLogged}) {
+function Promo() {
   return (
     <>
-      <Header isLogged={isLogged}/>
+      <Header isLogged={false} />
       <section className="promo">
         <div className="promo__content">
           <div className="promo__img" />
@@ -15,7 +17,9 @@ function Promo({isLogged}) {
               Листайте ниже, чтобы узнать больше про этот проект и его
               создателя.
             </p>
-            <button className="promo__button">Узнать больше</button>
+            <a href="#about" className='promo__button_link'>
+              <button className="promo__button">Узнать больше</button>
+            </a>
           </div>
         </div>
       </section>

@@ -1,3 +1,4 @@
+import "./MoviesCardList.css";
 import { movies } from '../../utils/constants';
 import MoviesCard from '../MoviesCard/MoviesCard';
 

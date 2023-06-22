@@ -1,31 +1,26 @@
 import { Link } from 'react-router-dom';
-import header_logo from '../../images/header_logo.svg';
+import Navigation from '../Navigation/Navigation';
+import './Header.css';
+import Logo from '../Logo/Logo';
 
 function Header({ isLogged }) {
   return (
     <header className="header">
       <div className="header__content">
-        <Link to="/">
-          <img
-            className="header__logo"
-            src={header_logo}
-            alt="логотип проекта"
-          />
-        </Link>
+        <Logo />
         {isLogged ? (
           <nav className="header__nav-movies">
-            <div className="header__movies">
-              <button className="header__btn_movies">Фильмы</button>
-              <button className="header__btn_saved-movies">
-                Сохранённые фильмы
-              </button>
-            </div>
-            <button className="header__btn_account">Аккаунт</button>
+            <Navigation />
+            <Link to="/profile" className="header__btn_account">Аккаунт</Link>
           </nav>
         ) : (
           <nav className="header__nav-auth">
-            <button className="header__btn_signup">Регистрация</button>
-            <button className="header__btn_signin">Войти</button>
+            <Link to="/signup">
+              <button className="header__btn_signup">Регистрация</button>
+            </Link>
+            <Link to="/signin">
+              <button className="header__btn_signin">Войти</button>
+            </Link>
           </nav>
         )}
       </div>

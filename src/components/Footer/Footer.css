@@ -51,6 +51,11 @@
   color: #fff;
   text-decoration: none;
   cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.footer__link:hover {
+  color: #3ddc84;
 }
 
 .footer__link:last-of-type {

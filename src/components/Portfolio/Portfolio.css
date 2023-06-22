@@ -35,36 +35,3 @@
   width: 100%;
   list-style: none;
 }
-
-.portfolio__item {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: start;
-  border-bottom: 1px solid #424242;
-  margin-bottom: 20px;
-}
-
-.portfolio__item:last-of-type {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.portfolio__item-name {
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 50px;
-  letter-spacing: -0.04em;
-  padding-bottom: 19px;
-  margin: 0;
-}
-
-.portfolio__item-link {
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 60px;
-  letter-spacing: -0.04em;
-  text-decoration: none;
-  color: #fff;
-}

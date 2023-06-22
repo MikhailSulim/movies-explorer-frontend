@@ -1,3 +1,5 @@
+import "./MoviesCard.css";
+
 function MoviesCard({ title, length, img, checked }) {
   const movieChoiceClassname = `movie__choice ${
     checked ? 'movie__checked' : 'movie__unchecked'

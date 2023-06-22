@@ -1,1 +1,19 @@
+.movies-list__btn {
+  cursor: pointer;
+  width: 320px;
+  height: 36px;
+  margin: 0 auto;
+  border-radius: 6px;
+  background-color: #2f2f2f;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
 
+.movies-list__btn:hover {
+  background-color: #3ddc84;
+}

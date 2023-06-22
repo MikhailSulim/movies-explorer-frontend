@@ -1,32 +1,32 @@
-import header_logo from '../../images/header_logo.svg';
+import './Register.css';
 import { Link } from 'react-router-dom';
+import Input from '../Input/Input';
+import Logo from '../Logo/Logo';
 
 function Register() {
   return (
     <section className="register">
       <div className="register__container">
-        <img className="header__logo" src={header_logo} alt="логотип проекта" />
-        <h1 className="register__title">Рады видеть!</h1>
+        <Logo />
+        <h1 className="register__title">Добро пожаловать!</h1>
         <form className="register__form">
-          <span className="register__text-input">Имя</span>
-          <input
-            className="register__input register__input_name"
-            defaultValue={'Виталий'}
-            type="text"
+          <Input name="name" label="Имя" error="" isValid={true} type="text" />
+          <Input
+            name="email"
+            label="E-mail"
+            error=""
+            isValid={true}
+            type="email"
           />
-          <span className="register__text-input">E-mail</span>
-          <input
-            className="register__input register__input_email"
-            defaultValue={'pochta@yandex.ru'}
-            type="text"
-          />
-          <span className="register__text-input">Пароль</span>
-          <input
-            className="register__input register__input_password register__input_error"
-            defaultValue={'password'}
+
+          <Input
+            name="password"
+            label="Пароль"
+            error="Что-то пошло не так..."
+            isValid={false}
             type="password"
           />
-          <span className='register__error'>Что-то пошло не так...</span>
+
           <button className="register__button">Зарегистрироваться</button>
         </form>
         <span className="register__text">
