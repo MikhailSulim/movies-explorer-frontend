@@ -20,7 +20,6 @@
   align-items: center;
 }
 
-
 .header__btn_signup {
   cursor: pointer;
   font-style: normal;
@@ -30,7 +29,7 @@
   color: #fff;
   background-color: transparent;
   border: none;
-  margin-right: 30px;
+  margin-right: 25px;
   transition: opacity 0.3s ease-in-out;
 }
 
@@ -87,3 +86,124 @@
   width: 100%;
   align-items: center;
 }
+
+@media screen and (max-width: 768px) {
+  .header {
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* width: 100%; */
+    /* background-color: transparent; */
+    /* z-index: 1; */
+  }
+
+  .header__content {
+    /* max-width: 1280px; */
+    /* min-width: 320px; */
+    /* width: 100%; */
+    /* box-sizing: border-box; */
+    padding: 18px 30px 18px 30px;
+    /* margin: 0 auto; */
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* justify-content: space-between; */
+    /* align-items: center; */
+  }
+
+ .header__btn_signup {
+  margin-right: 25px;
+ }
+
+
+  /* .header__btn_account {
+    width: 100px;
+    height: 32px;
+    background-color: #313131;
+    color: #fff;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    text-decoration: none;
+  } */
+
+  .header__nav-movies {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+  }
+}
+
+  @media screen and (max-width: 570px) {
+    .header {
+      /* display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      background-color: transparent;
+      z-index: 1; */
+    }
+
+    .header__content {
+      /* max-width: 1280px; */
+      /* min-width: 320px; */
+      /* width: 100%; */
+      /* box-sizing: border-box; */
+      padding: 18px 14px 18px 14px;
+      /* margin: 0 auto; */
+      /* display: flex; */
+      /* flex-direction: row; */
+      /* justify-content: space-between; */
+      /* align-items: center; */
+    }
+
+    .header__btn_signup {
+      font-size: 10px;
+      margin-right: 14px;
+    }
+
+    .header__btn_signin {
+      font-size: 10px;
+      width: 54px;
+      height: 26px;
+    }
+
+    .header__btn_account {
+      width: 100px;
+      height: 32px;
+      background-color: #313131;
+      color: #fff;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+      text-decoration: none;
+    }
+
+
+
+    .header__nav-movies {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+    }
+  }
+

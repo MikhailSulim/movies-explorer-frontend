@@ -17,31 +17,10 @@ function App() {
     <div className="app">
       <Routes>
         {/*отображается страница «О проекте»*/}
-        <Route
-          path="/"
-          element={
-            <>
-              {/* <Profile isLogged={isLoggedIn}/> */}
-              {/* <Login/> */}
-              {/* <NotFound/> */}
-              {/* <Register/> */}
-              <Main />
-              {/* <Movies/> */}
-              {/* <SavedMovies/> */}
-              {/* <Preloader /> */}
-            </>
-          }
-        />
+        <Route path="/" element={<Main />} />
 
         {/*отображается страница «Фильмы»*/}
-        <Route
-          path="/movies"
-          element={
-            <>
-              <Movies />{' '}
-            </>
-          }
-        />
+        <Route path="/movies" element={<Movies />} />
 
         {/*отображается страница «Сохранённые фильмы»*/}
         <Route path="/saved-movies" element={<SavedMovies />} />

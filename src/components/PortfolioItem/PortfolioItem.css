@@ -48,3 +48,31 @@
   color: #3ddc84;
   transform: scale(1.01);
 }
+
+@media screen and (max-width: 768px) {
+  .portfolio__item {
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  .portfolio__item-name {
+    font-size: 28px;
+    padding-bottom: 19px;
+  }
+
+  .portfolio__item-arrow {
+    font-size: 28px;
+    line-height: 60px;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .portfolio__item-name {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .portfolio__item-arrow {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}

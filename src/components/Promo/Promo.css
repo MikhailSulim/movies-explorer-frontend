@@ -1,6 +1,6 @@
 .promo {
   width: 100%;
-  height: 648px;
+  min-height: 648px;
   background-color: #073042;
   display: flex;
   margin-top: -74px;
@@ -29,7 +29,7 @@
   font-weight: 400;
   font-size: 50px;
   line-height: 58px;
-  width: 640px;
+  max-width: 640px;
   margin: 0;
 }
 
@@ -39,7 +39,7 @@
   line-height: 16px;
   opacity: 0.5;
   mix-blend-mode: normal;
-  width: 310px;
+  max-width: 310px;
   margin: 0;
   padding: 36px 0 146px 0;
 }
@@ -77,41 +77,44 @@
 
 @media screen and (max-width: 1100px) {
   .promo {
-    height: 784px;
-  }
-
-  .promo__title {
-    font-size: 40px;
-    line-height: 50px;
-    width: 680px;
-    text-align: center;
-  }
-
-  .promo__subtitle {
-    width: 260px;
-    padding: 0;
-    margin: 0 auto;
-    text-align: center;
+    min-height: 924px;
   }
 
   .promo__content {
+    margin: 0 auto;
     flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
+    justify-content: space-between;
     padding-top: 214px;
-    /* row-gap: 48px; */
-    height: 634px;
+    padding-bottom: 76px;
+    row-gap: 48px;
   }
 
+  .promo__img {
+    margin: 0 auto;
+    align-self: center;
+    justify-self: center;
+  }
   .promo__text {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
     justify-content: center;
+    align-items: center;
   }
 
-  .promo__img {
-    margin: 0 auto;
+  .promo__title {
+    font-size: 40px;
+    line-height: 50px;
+    max-width: 680px;
+    text-align: center;
+    margin: 0 auto 22px;
+  }
+
+  .promo__subtitle {
+    max-width: 260px;
+    padding: 0;
+    margin: 0 auto 92px;
+    text-align: center;
   }
 
   .promo__button {
@@ -119,19 +122,40 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .promo__title {
-    font-size: 30px;
-    line-height: 38px;
-    width: 300px;
-    letter-spacing: -0.04em;
-    margin: 0 auto;
+    font-size: 40px;
+    line-height: 50px;
+    max-width: 680px;
+    margin: 0 auto 22px;
     padding: 0;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .promo {
+    min-height: 710px;
+  }
+
+  .promo__content {
+    padding: 144px 10px 30px;
+    row-gap: 44px;
   }
 
   .promo__img {
     width: 210px;
     height: 206px;
-    margin: 0 auto;
+  }
+
+  .promo__title {
+    font-size: 30px;
+    line-height: 38px;
+    letter-spacing: -0.04em;
+    margin: 0 auto 24px;
+  }
+
+  .promo__subtitle {
+    margin: 0 auto 81px;
+    text-align: center;
   }
 }

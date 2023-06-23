@@ -15,7 +15,7 @@ function Header({ isLogged }) {
           </nav>
         ) : (
           <nav className="header__nav-auth">
-            <Link to="/signup">
+            <Link to="/signup" >
               <button className="header__btn_signup">Регистрация</button>
             </Link>
             <Link to="/signin">
