@@ -1,6 +1,9 @@
 # Фронтенд часть дипломного проекта movies-explorer
 Дипломная работа выполнена в рамках обучения в ЯПрактикуме.
 
+## Ссылка на макет
+https://disk.yandex.ru/d/MoAGVurpy8NnMg
+
 ## Описание проекта
 Сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете.
 
@@ -28,11 +31,8 @@ npm i
 ```
 npm run start
 ``` 
-## Ссылка на макет
-
-https://disk.yandex.ru/d/MoAGVurpy8NnMg
 
 ## Адрес репозитория
-[Ссылка на репозиторий](https://github.com/MikhailSulim/movies-explorer-api)
+[Ссылка на репозиторий](https://github.com/MikhailSulim/movies-explorer-frontend)
 
 ## Ссылки на проект
