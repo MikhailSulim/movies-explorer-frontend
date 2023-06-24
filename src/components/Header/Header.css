@@ -116,13 +116,6 @@
     margin-right: 25px;
   }
 
-  .header__nav-movies {
-    /* display: flex; */
-    /* flex-direction: row; */
-    /* justify-content: space-between; */
-    /* width: 100%; */
-    /* align-items: center; */
-  }
 
   .header__menu_mobile {
     display: flex;

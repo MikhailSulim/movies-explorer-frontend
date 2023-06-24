@@ -7,20 +7,12 @@ import Register from '../Register/Register';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
-import Preloader from '../Preloader/Preloader';
+import Preloader2 from '../Preloader2/Preloader';
 import NotFound from '../NotFound/NotFound';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  // const [isMobileMenuShow, setIsMobileMenuShow] = useState(false);
 
-  // const closeMobileMenu = () => {
-  //   setIsMobileMenuShow(false);
-  // }
-
-  // const openMobileMenu = () => {
-  //   setIsMobileMenuShow(true);
-  // }
 
   return (
     <div className="app">
@@ -43,7 +35,7 @@ function App() {
         {/*отображается страница регистрации*/}
         <Route path="/signup" element={<Register />} />
 
-        <Route path="/1" element={<Preloader/>}/>
+        <Route path="/1" element={<Preloader2/>}/>
         <Route path="*" element={<NotFound />} />
 
 
