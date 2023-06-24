@@ -1,12 +1,12 @@
-import "./Profile.css";
+import './Profile.css';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 
 function Profile({ isLogged }) {
   return (
-    <>
+    <section className="profile">
       <Header isLogged={isLogged} />
-      <section className="profile">
+      <div className="profile__container">
         <h1 className="profile__title">Привет, Виталий!</h1>
         <form className="profile__form">
           <label className="profile__label">
@@ -25,15 +25,18 @@ function Profile({ isLogged }) {
               defaultValue={'pochta@yandex.ru'}
             />
           </label>
-          <button type="submit" className="profile__button profile__button_edit">
+          <button
+            type="submit"
+            className="profile__button profile__button_edit"
+          >
             Редактировать
           </button>
         </form>
         <Link to="/" className="profile__button profile__button_logout">
           Выйти из аккаунта
         </Link>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
 

@@ -65,3 +65,28 @@
 .movie__unchecked {
   background-image: url('../../images/movie_uncheked.svg');
 }
+
+@media screen and (max-width: 768px) {
+  .movie__container {
+    max-width: 339px;
+    height: 258px;
+  }
+
+  .movie__img {
+    max-width: 339px;
+    height: 190px;
+  }
+}
+
+@media screen and (max-width:570px) {
+  .movie__container {
+    max-width: 300px;
+    height: 236px;
+  }
+
+  .movie__img {
+    max-width: 300px;
+    height: 168px;
+  }
+  
+}

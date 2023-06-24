@@ -12,6 +12,15 @@ import NotFound from '../NotFound/NotFound';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  // const [isMobileMenuShow, setIsMobileMenuShow] = useState(false);
+
+  // const closeMobileMenu = () => {
+  //   setIsMobileMenuShow(false);
+  // }
+
+  // const openMobileMenu = () => {
+  //   setIsMobileMenuShow(true);
+  // }
 
   return (
     <div className="app">
@@ -34,7 +43,9 @@ function App() {
         {/*отображается страница регистрации*/}
         <Route path="/signup" element={<Register />} />
 
+        <Route path="/1" element={<Preloader/>}/>
         <Route path="*" element={<NotFound />} />
+
 
         {/*Защищать маршруты авторизацией пока не требуется. Достаточно наладить
         работу всех ссылок: нажатие на логотип ведёт на страницу «О проекте»;

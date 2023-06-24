@@ -32,9 +32,6 @@
   width: 100%;
 }
 
-
-
-
 .register__button {
   background-color: #4285f4;
   height: 45px;
@@ -75,15 +72,37 @@
   color: #3ddc84;
 }
 
-.register__input_error {
-  /* color: #ee3465; */
-}
+@media screen and (max-width: 570px) {
+  .register__container {
+    max-width: 260px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
 
-.register__error {
-  /* font-style: normal;
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 12px;
-  color: #ee3465;
-  margin: 0 0 69px 0; */
+  .register__form {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .register__title {
+    margin: 50px 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .register__button {
+    margin: 88px 0 13px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .register__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .register__text-signin {
+    padding-left: 7px;
+  }
 }

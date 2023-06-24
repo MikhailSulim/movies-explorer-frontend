@@ -1,7 +1,8 @@
 .logo__link {
   width: 38px;
   height: 38px;
-  margin: 0 44px 0 0;
+  margin: 0;
+  padding: 0;
 }
 
 .logo {
@@ -12,6 +13,7 @@
   height: 38px;
   padding: 0;
   transition: transform 0.2s ease-in-out;
+  margin: 0;
 }
 
 .logo:hover {
