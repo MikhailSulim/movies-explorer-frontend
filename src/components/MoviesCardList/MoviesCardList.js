@@ -1,11 +1,16 @@
-import "./MoviesCardList.css";
+import './MoviesCardList.css';
 import { movies } from '../../utils/constants';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
 function MoviesCardList() {
   return (
     <section className="movies-list">
-      <div className="movies-list__container">
+      {movies.length === 0 && (
+        <span className="movies-list__notfound">
+          К сожалению ничего не найдено.
+        </span>
+      )}
+      <ul className="movies-list__container">
         {movies.map((movie) => (
           <MoviesCard
             title={movie.nameRU}
@@ -16,8 +21,7 @@ function MoviesCardList() {
             checked={true}
           />
         ))}
-      </div>
-      
+      </ul>
     </section>
   );
 }

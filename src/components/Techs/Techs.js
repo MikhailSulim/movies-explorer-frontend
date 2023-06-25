@@ -10,15 +10,15 @@ function Techs() {
           На курсе веб-разработки мы освоили технологии, которые применили в
           дипломном проекте.
         </p>
-        <div className="techs__blocks">
-          <div className="techs__block">HTML</div>
-          <div className="techs__block">CSS</div>
-          <div className="techs__block">JS</div>
-          <div className="techs__block">React</div>
-          <div className="techs__block">Git</div>
-          <div className="techs__block">Express.js</div>
-          <div className="techs__block">mongoDB</div>
-        </div>
+        <ul className="techs__blocks">
+          <li className="techs__block">HTML</li>
+          <li className="techs__block">CSS</li>
+          <li className="techs__block">JS</li>
+          <li className="techs__block">React</li>
+          <li className="techs__block">Git</li>
+          <li className="techs__block">Express.js</li>
+          <li className="techs__block">mongoDB</li>
+        </ul>
       </div>
     </section>
   );

@@ -58,18 +58,24 @@
   padding: 0;
 }
 
-.about__bar {
-  height: 36px;
-  display: flex;
-  flex-direction: row;
+.about__progress {
+  display: grid;
+  grid-template-columns: minmax(100px, 1fr) 4fr;
+}
+
+.about__progress-column {
+  text-align: center;
+}
+
+.about__progress-bar {
+  min-height: 36px;
   margin-bottom: 14px;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
 }
 
-.about__bar_backend {
-  width: 20%;
+.about__progress-bar_back {
   background-color: #3ddc84;
   color: #000;
   display: flex;
@@ -77,8 +83,7 @@
   justify-content: center;
 }
 
-.about__bar_frontend {
-  width: 80%;
+.about__progress-bar_front {
   background-color: #303030;
   color: #fff;
   display: flex;
@@ -86,27 +91,11 @@
   justify-content: center;
 }
 
-.about__bar-text {
-  display: flex;
-  flex-direction: row;
+.about__progress-text {
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
   color: #8b8b8b;
-}
-
-.about__bar-text_backend {
-  width: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.about__bar-text_frontend {
-  width: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 @media screen and (max-width: 768px) {
@@ -131,7 +120,7 @@
     line-height: 18px;
   }
 
-  .about__bar-text {
+  .about__progress-text {
     font-family: 'Suisse Intl', Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -169,33 +158,17 @@
     line-height: 16px;
   }
 
-  .about__bar {
-    height: 35px;
+  .about__progress-bar {
+    min-height: 35px;
     margin-bottom: 10px;
     font-size: 11px;
     line-height: 13px;
   }
 
-  .about__bar_backend {
-    width: 35%;
-  }
-
-  .about__bar_frontend {
-    width: 65%;
-  }
-
-  .about__bar-text {
+  .about__progress-text {
     font-weight: 500;
     font-size: 11px;
     line-height: 13px;
     color: #a0a0a0;
-  }
-
-  .about__bar-text_backend {
-    width: 35%;
-  }
-
-  .about__bar-text_frontend {
-    width: 65%;
   }
 }

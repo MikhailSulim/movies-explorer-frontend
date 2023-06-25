@@ -35,4 +35,3 @@ npm run start
 ## Адрес репозитория
 [Ссылка на репозиторий](https://github.com/MikhailSulim/movies-explorer-frontend)
 
-## Ссылки на проект

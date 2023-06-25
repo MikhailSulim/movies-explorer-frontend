@@ -1,6 +1,6 @@
 import './Promo.css';
 import Header from '../Header/Header';
-import { Link } from 'react-router-dom';
+import promo_img from './../../images/promo_img.svg';
 
 function Promo() {
   return (
@@ -8,16 +8,23 @@ function Promo() {
       <Header isLogged={false} />
       <section className="promo">
         <div className="promo__content">
-          <div className="promo__img" />
+          <div className="promo__img-container">
+            <img
+              className="promo__img"
+              src={promo_img}
+              alt="Логотип в виде земного шара, суша состоит из множества слов web"
+            />{' '}
+          </div>
           <div className="promo__text">
             <h1 className="promo__title">
-              Учебный проект студента факультета Веб&#8209;разработки.
+              Учебный проект студента факультета<br/>Веб-разработки.
+               {/* &#8209; */}
             </h1>
             <p className="promo__subtitle">
               Листайте ниже, чтобы узнать больше про этот проект и его
               создателя.
             </p>
-            <a href="#about" className='promo__button_link'>
+            <a href="#about" className="promo__button_link">
               <button className="promo__button">Узнать больше</button>
             </a>
           </div>
@@ -28,3 +35,6 @@ function Promo() {
 }
 
 export default Promo;
+
+// TODO исправить промо
+// TODO исправить технологии

@@ -25,7 +25,9 @@ function Login() {
             error=""
           />
 
-          <button className="login__button">Войти</button>
+          <button type="submit" className="login__button">
+            Войти
+          </button>
         </form>
         <span className="login__text">
           Ещё не зарегистрированы?

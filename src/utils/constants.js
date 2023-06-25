@@ -1,3 +1,5 @@
+export const movies1 = [];
+
 export const movies = [
   {
     nameRU: '33 слова о дизайне',

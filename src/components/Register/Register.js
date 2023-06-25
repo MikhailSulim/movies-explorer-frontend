@@ -10,7 +10,15 @@ function Register() {
         <Logo />
         <h1 className="register__title">Добро пожаловать!</h1>
         <form className="register__form">
-          <Input name="name" label="Имя" error="" isValid={true} type="text" />
+          <Input
+            name="name"
+            label="Имя"
+            error=""
+            isValid={true}
+            type="text"
+            minLength={2}
+            maxLength={30}
+          />
           <Input
             name="email"
             label="E-mail"
@@ -25,9 +33,12 @@ function Register() {
             error="Что-то пошло не так..."
             isValid={false}
             type="password"
+            minLength={8}
           />
 
-          <button className="register__button">Зарегистрироваться</button>
+          <button type="submit" className="register__button">
+            Зарегистрироваться
+          </button>
         </form>
         <span className="register__text">
           Уже зарегистрированы?

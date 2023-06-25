@@ -82,7 +82,6 @@
 .header__nav-movies {
   display: grid;
   width: 100%;
-  /* align-items: center; */
 }
 
 .header__menu_full {
@@ -115,7 +114,6 @@
   .header__btn_signup {
     margin-right: 25px;
   }
-
 
   .header__menu_mobile {
     display: flex;

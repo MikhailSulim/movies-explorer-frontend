@@ -5,7 +5,7 @@ function MoviesCard({ title, length, img, checked }) {
     checked ? 'movie__checked' : 'movie__unchecked'
   }`;
   return (
-    <div className="movie__container">
+    <li className="movie__container">
       <div className="movie__header">
         <div className="movie__info">
           <h2 className="movie__title">{title}</h2>
@@ -14,7 +14,7 @@ function MoviesCard({ title, length, img, checked }) {
         <div className={movieChoiceClassname}></div>
       </div>
       <img className="movie__img" alt="Кадр из фильма" src={img} />
-    </div>
+    </li>
   );
 }
 
