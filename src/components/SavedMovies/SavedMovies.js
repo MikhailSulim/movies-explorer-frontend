@@ -2,16 +2,24 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
-import "./SavedMovies.css";
+import './SavedMovies.css';
+import { saved_movies } from '../../utils/constants';
+import Preloader from '../Preloader/Preloader';
 
-function SavedMovies() {
+function SavedMovies({ isLogged, isLoading }) {
   return (
     <>
-      <Header isLogged={true} />
-      <SearchForm />
-      <MoviesCardList />
-      <div className="saved-movies-list__space" ></div>
-      <Footer />
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <>
+          <Header isLogged={isLogged} />
+          <SearchForm />
+          <MoviesCardList moviesList={saved_movies} isSaved={true} />
+          <div className="saved-movies-list__space"></div>
+          <Footer />
+        </>
+      )}
     </>
   );
 }

@@ -1,9 +1,9 @@
-import "./MoviesCard.css";
+import './MoviesCard.css';
 
-function MoviesCard({ title, length, img, checked }) {
+function MoviesCard({ title, length, img, checked, isSaved }) {
   const movieChoiceClassname = `movie__choice ${
     checked ? 'movie__checked' : 'movie__unchecked'
-  }`;
+  } ${isSaved ? 'movie__delete' : ''}`;
   return (
     <li className="movie__container">
       <div className="movie__header">

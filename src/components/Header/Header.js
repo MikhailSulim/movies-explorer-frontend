@@ -38,10 +38,14 @@ function Header({ isLogged }) {
         ) : (
           <nav className="header__nav-auth">
             <Link to="/signup">
-              <button className="header__btn_signup">Регистрация</button>
+              <button type="button" className="header__btn_signup">
+                Регистрация
+              </button>
             </Link>
             <Link to="/signin">
-              <button className="header__btn_signin">Войти</button>
+              <button type="button" className="header__btn_signin">
+                Войти
+              </button>
             </Link>
           </nav>
         )}

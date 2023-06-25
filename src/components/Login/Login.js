@@ -23,6 +23,7 @@ function Login() {
             isValid={true}
             type="password"
             error=""
+            minLength={8}
           />
 
           <button type="submit" className="login__button">

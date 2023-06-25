@@ -7,24 +7,24 @@ import Register from '../Register/Register';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
-import Preloader from '../Preloader/Preloader';
 import NotFound from '../NotFound/NotFound';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
 
   return (
     <div className="app">
       <Routes>
         {/*отображается страница «О проекте»*/}
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<Main isLogged={isLoggedIn} />} />
 
         {/*отображается страница «Фильмы»*/}
-        <Route path="/movies" element={<Movies />} />
+        <Route path="/movies" element={<Movies isLogged={isLoggedIn} isLoading={isLoading}/>} />
 
         {/*отображается страница «Сохранённые фильмы»*/}
-        <Route path="/saved-movies" element={<SavedMovies />} />
+        <Route path="/saved-movies" element={<SavedMovies isLogged={isLoggedIn} isLoading={isLoading}/>} />
 
         {/*отображается страница с профилем пользователя*/}
         <Route path="/profile" element={<Profile isLogged={isLoggedIn} />} />
@@ -35,7 +35,6 @@ function App() {
         {/*отображается страница регистрации*/}
         <Route path="/signup" element={<Register />} />
 
-        {/* <Route path="/1" element={<Preloader/>}/> */}
         <Route path="*" element={<NotFound />} />
 
 

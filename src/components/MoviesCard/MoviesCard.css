@@ -43,7 +43,7 @@
   object-fit: cover;
   /* max-width: 364px; */
   width: 100%;
-  min-height: 203px;
+  height: 203px;
   /* height: 100%; */
 }
 

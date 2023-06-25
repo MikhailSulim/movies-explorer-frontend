@@ -2,10 +2,10 @@ import './Promo.css';
 import Header from '../Header/Header';
 import promo_img from './../../images/promo_img.svg';
 
-function Promo() {
+function Promo({isLogged}) {
   return (
     <>
-      <Header isLogged={false} />
+      <Header isLogged={isLogged} />
       <section className="promo">
         <div className="promo__content">
           <div className="promo__img-container">

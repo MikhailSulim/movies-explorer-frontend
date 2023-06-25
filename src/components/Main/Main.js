@@ -5,12 +5,12 @@ import Portfolio from '../Portfolio/Portfolio';
 import Promo from '../Promo/Promo';
 import Techs from '../Techs/Techs';
 
-function Main() {
+function Main({isLogged}) {
 
   
   return (
     <>
-      <Promo />
+      <Promo isLogged={isLogged}/>
       <AboutProject />
       <Techs />
       <AboutMe />

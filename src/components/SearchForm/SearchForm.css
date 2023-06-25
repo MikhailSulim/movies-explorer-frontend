@@ -9,7 +9,7 @@
   flex-direction: column;
 }
 
-.search__container {
+.search__form {
   padding-bottom: 39px;
   display: flex;
   flex-direction: column;
@@ -70,7 +70,7 @@
     padding: 80px 30px 9px;
   }
 
-  .search__container {
+  .search__form {
     padding-bottom: 39px;
     display: flex;
     flex-direction: column;
@@ -95,14 +95,12 @@
 
   .search__input {
     height: 44px;
-    /* max-width: 212px; */
-    /* width: 100%; */
     padding: 13px 16px;
     font-size: 12px;
     line-height: 18px;
   }
 
-  .search__container {
+  .search__form {
     padding-bottom: 42px;
     display: flex;
     flex-direction: column;
