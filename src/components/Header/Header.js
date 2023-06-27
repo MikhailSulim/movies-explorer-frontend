@@ -23,27 +23,27 @@ function Header({ isLogged }) {
         <Logo />
         {isLogged ? (
           <nav className="header__nav-movies">
-            <div className="header__menu_full">
+            <div className="header__menu-full">
               <Navigation />
-              <Link to="/profile" className="header__btn_account">
+              <Link to="/profile" className="header__btn-account">
                 Аккаунт
               </Link>
             </div>
             <button
               type="button"
-              className="header__menu_mobile"
+              className="header__menu-mobile"
               onClick={openMobileMenu}
             ></button>
           </nav>
         ) : (
           <nav className="header__nav-auth">
             <Link to="/signup">
-              <button type="button" className="header__btn_signup">
+              <button type="button" className="header__btn-signup">
                 Регистрация
               </button>
             </Link>
             <Link to="/signin">
-              <button type="button" className="header__btn_signin">
+              <button type="button" className="header__btn-signin">
                 Войти
               </button>
             </Link>

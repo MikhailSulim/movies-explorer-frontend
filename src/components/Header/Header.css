@@ -10,6 +10,7 @@
 .header__content {
   max-width: 1280px;
   min-width: 320px;
+  max-height: 74px;
   width: 100%;
   box-sizing: border-box;
   padding: 18px 70px 18px 70px;
@@ -20,7 +21,7 @@
   align-items: center;
 }
 
-.header__btn_signup {
+.header__btn-signup {
   cursor: pointer;
   font-style: normal;
   font-weight: 500;
@@ -33,11 +34,11 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-.header__btn_signup:hover {
+.header__btn-signup:hover {
   opacity: 0.6;
 }
 
-.header__btn_signin {
+.header__btn-signin {
   cursor: pointer;
   background-color: #3ddc84;
   border: none;
@@ -52,11 +53,11 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-.header__btn_signin:hover {
+.header__btn-signin:hover {
   opacity: 0.6;
 }
 
-.header__btn_account {
+.header__btn-account {
   width: 100px;
   height: 32px;
   background-color: #313131;
@@ -75,7 +76,7 @@
   text-decoration: none;
 }
 
-.header__btn_account:hover {
+.header__btn-account:hover {
   background-color: #3ddc84;
 }
 
@@ -84,7 +85,7 @@
   width: 100%;
 }
 
-.header__menu_full {
+.header__menu-full {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -92,7 +93,7 @@
   width: 100%;
 }
 
-.header__menu_mobile {
+.header__menu-mobile {
   display: none;
   background-image: url('./../../images/mobile_menu.svg');
   width: 44px;
@@ -111,15 +112,15 @@
     padding: 18px 30px 18px 30px;
   }
 
-  .header__btn_signup {
+  .header__btn-signup {
     margin-right: 25px;
   }
 
-  .header__menu_mobile {
+  .header__menu-mobile {
     display: flex;
   }
 
-  .header__menu_full {
+  .header__menu-full {
     display: none;
   }
 }
@@ -129,12 +130,12 @@
     padding: 18px 14px 18px 14px;
   }
 
-  .header__btn_signup {
+  .header__btn-signup {
     font-size: 10px;
     margin-right: 14px;
   }
 
-  .header__btn_signin {
+  .header__btn-signin {
     font-size: 10px;
     width: 54px;
     height: 26px;

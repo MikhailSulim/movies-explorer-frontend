@@ -34,19 +34,7 @@ function AboutProject() {
             </div>
             <p className="about__progress-text">Front-end</p>
           </div>
-
-          {/* <div className="about__bar_backend">
-            <div className="about__bar_field about__bar_field-front">1 неделя</div>
-            <p className="about__bar-text" */}
-
-          {/* // <div className="about__bar_backend">1 неделя</div> */}
-
-          {/* <div className="about__bar_frontend">4 недели</div> */}
         </div>
-        {/* <div className="about__bar-text">
-          <div className="about__bar-text_backend">Back-end</div>
-          <div className="about__bar-text_frontend">Front-end</div>
-        </div> */}
       </div>
     </section>
   );
