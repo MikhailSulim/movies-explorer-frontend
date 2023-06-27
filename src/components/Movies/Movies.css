@@ -1,4 +1,4 @@
-.movies-list__btn {
+.movies-list-btn {
   cursor: pointer;
   width: 320px;
   height: 36px;
@@ -14,18 +14,18 @@
   transition: all 0.3s ease-in-out;
 }
 
-.movies-list__btn:hover {
+.movies-list-btn:hover {
   background-color: #3ddc84;
 }
 
 @media screen and (max-width: 768px) {
-  .movies-list__btn {
+  .movies-list-btn {
     margin: 0 auto 80px;
   }
 }
 
 @media screen and (max-width: 570px) {
-    .movies-list__btn {
+    .movies-list-btn {
       margin: 0 auto 80px;
       max-width: 240px;
     }

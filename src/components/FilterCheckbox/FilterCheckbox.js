@@ -2,13 +2,14 @@ import "./FilterCheckbox.css";
 
 function FilterCheckbox() {
   return (
-    <div className="checkbox__container">
-      <input className="checkbox" type="checkbox" id="filter" />
+    <div className="checkbox">
+      <input className="checkbox__input" type="checkbox" id="filter" />
       <label for="filter" className="checkbox__label">
-        <div className="checkbox__ball"></div>
+        <span className="checkbox__ball"></span>
       </label>
       <span className="checkbox__text">Короткометражки</span>
     </div>
+  
   );
 }
 

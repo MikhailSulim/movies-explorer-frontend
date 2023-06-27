@@ -82,11 +82,11 @@
   transition: color 0.3s ease-in-out;
 }
 
-.profile__button_edit:hover {
+.profile__button_type_edit:hover {
   color: #3ddc84;
 }
 
-.profile__button_logout {
+.profile__button_type_logout {
   color: #ee3465;
   font-weight: 500;
   margin: 0;
@@ -94,7 +94,7 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-.profile__button_logout:hover {
+.profile__button_type_logout:hover {
   opacity: 0.6;
 }
 

@@ -2,7 +2,7 @@ import './Promo.css';
 import Header from '../Header/Header';
 import promo_img from './../../images/promo_img.svg';
 
-function Promo({isLogged}) {
+function Promo({ isLogged, onNavigateToAbout }) {
   return (
     <>
       <Header isLogged={isLogged} />
@@ -17,16 +17,17 @@ function Promo({isLogged}) {
           </div>
           <div className="promo__text">
             <h1 className="promo__title">
-              Учебный проект студента факультета<br/>Веб-разработки.
-               {/* &#8209; */}
+              Учебный проект студента факультета
+              <br />
+              Веб-разработки.
             </h1>
             <p className="promo__subtitle">
               Листайте ниже, чтобы узнать больше про этот проект и его
               создателя.
             </p>
-            <a href="#about" className="promo__button_link">
-              <button className="promo__button">Узнать больше</button>
-            </a>
+            <button className="promo__button" onClick={onNavigateToAbout}>
+              Узнать больше
+            </button>
           </div>
         </div>
       </section>

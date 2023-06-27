@@ -11,23 +11,23 @@ function Drawer({ onClose }) {
           onClick={onClose}
         ></button>
         <div className="drawer__link-box">
-          <Link to="/" className="drawer__link drawer__link_main">
+          <Link to="/" className="drawer__link drawer__link-main">
             Главная
           </Link>
           <Link
             to="/movies"
-            className="drawer__link drawer__link_movies drawer__link_current"
+            className="drawer__link drawer__link-movies drawer__link-current"
           >
             Фильмы
           </Link>
           <Link
             to="/saved-movies"
-            className="drawer__link drawer__link_saved-movies"
+            className="drawer__link drawer__link-saved-movies"
           >
             Сохранённые фильмы
           </Link>
         </div>
-        <Link to="/profile" className="header__btn_account">
+        <Link to="/profile" className="header__btn-account">
           Аккаунт
         </Link>
       </div>

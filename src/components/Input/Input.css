@@ -1,4 +1,4 @@
-.input__container {
+.input {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -6,7 +6,7 @@
   flex-direction: column;
 }
 
-.input__container:last-of-type {
+.input:last-of-type {
   margin: 0 0 69px 0;
 }
 
@@ -34,15 +34,15 @@
   padding: 15px;
 }
 
-.input__field_valid:focus {
+.input__field_valid_true:focus {
   outline: 2px solid #3ddc84;
 }
 
-.input__field_error {
+.input__field_valid_false {
   color: #ee3465;
 }
 
-.input__field_error:focus {
+.input__field_valid_false:focus {
   outline: 2px solid #ee3465;
 }
 

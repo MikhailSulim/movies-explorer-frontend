@@ -38,7 +38,6 @@
   font-size: 14px;
   line-height: 18px;
   color: #8b8b8b;
-  
 }
 
 .search__input:focus {
@@ -91,7 +90,6 @@
   .search {
     padding: 80px 14px 0px;
   }
-  
 
   .search__input {
     height: 44px;

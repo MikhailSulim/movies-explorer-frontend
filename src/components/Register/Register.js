@@ -5,8 +5,8 @@ import Logo from '../Logo/Logo';
 
 function Register() {
   return (
-    <section className="register">
-      <div className="register__container">
+    <main className="register">
+      <section className="register__container">
         <Logo />
         <h1 className="register__title">Добро пожаловать!</h1>
         <form className="register__form">
@@ -46,8 +46,8 @@ function Register() {
             Войти
           </Link>
         </span>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }
 

@@ -5,7 +5,7 @@ import './Header.css';
 import Drawer from '../Drawer/Drawer';
 import Logo from '../Logo/Logo';
 
-function Header({ isLogged }) {
+function Header({ isLogged, onNavigateToSignin, onNavigateToSignup }) {
   const [isMobileMenuShow, setIsMobileMenuShow] = useState(false);
 
   const closeMobileMenu = () => {
@@ -37,16 +37,16 @@ function Header({ isLogged }) {
           </nav>
         ) : (
           <nav className="header__nav-auth">
-            <Link to="/signup">
-              <button type="button" className="header__btn-signup">
+            
+              <button type="button" className="header__btn-signup" onClick={onNavigateToSignup}>
                 Регистрация
               </button>
-            </Link>
-            <Link to="/signin">
-              <button type="button" className="header__btn-signin">
+            
+            
+              <button type="button" className="header__btn-signin" onClick={onNavigateToSignin}>
                 Войти
               </button>
-            </Link>
+            
           </nav>
         )}
       </div>

@@ -5,8 +5,8 @@ import Logo from '../Logo/Logo';
 
 function Login() {
   return (
-    <section className="login">
-      <div className="login__container">
+    <main className="login">
+      <section className="login__container">
         <Logo />
         <h1 className="login__title">Рады видеть!</h1>
         <form className="login__form">
@@ -36,8 +36,8 @@ function Login() {
             Регистрация
           </Link>
         </span>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }
 

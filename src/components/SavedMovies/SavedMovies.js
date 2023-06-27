@@ -16,7 +16,7 @@ function SavedMovies({ isLogged, isLoading }) {
           <Header isLogged={isLogged} />
           <SearchForm />
           <MoviesCardList moviesList={saved_movies} isSaved={true} />
-          <div className="saved-movies-list__space"></div>
+          <div className="saved-movies-list-space"></div>
           <Footer />
         </>
       )}

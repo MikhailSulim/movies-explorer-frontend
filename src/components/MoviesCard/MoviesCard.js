@@ -1,19 +1,19 @@
 import './MoviesCard.css';
 
 function MoviesCard({ title, length, img, checked, isSaved }) {
-  const movieChoiceClassname = `movie__choice ${
-    checked ? 'movie__checked' : 'movie__unchecked'
-  } ${isSaved ? 'movie__delete' : ''}`;
+  const movieChoiceClassname = `movie-card__choice-btn ${
+    checked ? 'movie-card__choice-btn_checked' : 'movie-card__choice-btn_unchecked'
+  } ${isSaved ? 'movie-card__choice-btn_delete' : ''}`;
   return (
-    <li className="movie__container">
-      <div className="movie__header">
-        <div className="movie__info">
-          <h2 className="movie__title">{title}</h2>
-          <span className="movie__length">{length}</span>
+    <li className="movie-card">
+      <div className="movie-card__header">
+        <div className="movie-card__info">
+          <h2 className="movie-card__title">{title}</h2>
+          <span className="movie-card__length">{length}</span>
         </div>
-        <div className={movieChoiceClassname}></div>
+        <button type='button' className={movieChoiceClassname}></button>
       </div>
-      <img className="movie__img" alt="Кадр из фильма" src={img} />
+      <img className="movie-card__img" alt="Кадр из фильма" src={img} />
     </li>
   );
 }

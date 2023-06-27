@@ -12,7 +12,7 @@ function Profile({ isLogged }) {
           <label className="profile__label">
             Имя
             <input
-              className="profile__input profile__input_name"
+              className="profile__input profile__input_type_name"
               type="text"
               defaultValue={'Виталий'}
             />
@@ -20,19 +20,19 @@ function Profile({ isLogged }) {
           <label className="profile__label">
             E-mail
             <input
-              className="profile__input profile__input_email"
+              className="profile__input profile__input_type_email"
               type="text"
               defaultValue={'pochta@yandex.ru'}
             />
           </label>
           <button
             type="submit"
-            className="profile__button profile__button_edit"
+            className="profile__button profile__button_type_edit"
           >
             Редактировать
           </button>
         </form>
-        <Link to="/" className="profile__button profile__button_logout">
+        <Link to="/" className="profile__button profile__button_type_logout">
           Выйти из аккаунта
         </Link>
       </div>

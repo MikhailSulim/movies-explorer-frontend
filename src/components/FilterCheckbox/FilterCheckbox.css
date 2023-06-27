@@ -1,4 +1,4 @@
-.checkbox__container {
+.checkbox {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 
-.checkbox {
+.checkbox__input {
   visibility: hidden;
 }
 
@@ -23,7 +23,7 @@
   margin-right: 10px;
 }
 
-.checkbox:checked + .checkbox__label {
+.checkbox__input:checked + .checkbox__label {
   background-color: #3ddc84;
 }
 
@@ -40,7 +40,7 @@
   animation: slideOff 0.3s linear forwards;
 }
 
-.checkbox:checked + .checkbox__label .checkbox__ball {
+.checkbox__input:checked + .checkbox__label .checkbox__ball {
   animation: slideOn 0.3s linear forwards;
 }
 

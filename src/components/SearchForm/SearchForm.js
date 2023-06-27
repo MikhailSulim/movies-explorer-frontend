@@ -3,17 +3,22 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm() {
   return (
-    <section className="search">
+    <div className="search">
       <form className="search__form">
         <div className="search__field">
-          <input className="search__input" type="text" placeholder="Фильм" />
+          <input
+            className="search__input"
+            type="text"
+            placeholder="Фильм"
+            required
+          />
           <button type="submit" className="search__button">
             Найти
           </button>
         </div>
         <FilterCheckbox />
       </form>
-    </section>
+    </div>
   );
 }
 
