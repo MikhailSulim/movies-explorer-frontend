@@ -1,0 +1,98 @@
+.movie-card {
+  max-width: 364px;
+  min-height: 271px;
+  background-color: #222222;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+  list-style: none;
+}
+
+.movie-card__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 14px;
+}
+
+.movie-card__info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 9px;
+}
+
+.movie-card__title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  color: #fff;
+  margin: 0;
+}
+
+.movie-card__length {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #8b8b8b;
+}
+
+.movie-card__img {
+  background-repeat: no-repeat;
+  object-fit: cover;
+  /* max-width: 364px; */
+  width: 100%;
+  height: 203px;
+  /* height: 100%; */
+}
+
+.movie-card__choice-btn {
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.movie-card__choice-btn:hover {
+  opacity: 0.6;
+}
+
+.movie-card__choice-btn_checked {
+  background-image: url('../../images/movie_cheked.svg');
+}
+.movie-card__choice-btn_delete {
+  background-image: url('../../images/movie_delete.svg');
+}
+.movie-card__choice-btn_unchecked {
+  background-image: url('../../images/movie_uncheked.svg');
+}
+
+@media screen and (max-width: 768px) {
+  .movie-card {
+    max-width: 339px;
+    height: 258px;
+  }
+
+  .movie-card__img {
+    max-width: 339px;
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .movie-card {
+    max-width: 300px;
+    height: 236px;
+  }
+
+  .movie-card__img {
+    max-width: 300px;
+    height: 168px;
+  }
+}
