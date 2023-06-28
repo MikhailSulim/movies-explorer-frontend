@@ -1,24 +1,20 @@
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import './SavedMovies.css';
 import { saved_movies } from '../../utils/constants';
 import Preloader from '../Preloader/Preloader';
 
-function SavedMovies({ isLogged, isLoading }) {
+function SavedMovies({ isLoading }) {
   return (
     <>
       {isLoading ? (
         <Preloader />
       ) : (
-        <>
-          <Header isLogged={isLogged} />
+        <main className="saved-movies-main">
           <SearchForm />
           <MoviesCardList moviesList={saved_movies} isSaved={true} />
           <div className="saved-movies-list-space"></div>
-          <Footer />
-        </>
+        </main>
       )}
     </>
   );

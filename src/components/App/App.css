@@ -2,10 +2,15 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   margin: 0 auto;
   padding: 0;
   background-color: #202020;
   font-family: 'Inter', Arial, sans-serif;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }

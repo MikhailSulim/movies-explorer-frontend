@@ -1,7 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Drawer.css';
 
 function Drawer({ onClose }) {
+  const { pathname } = useLocation();
+
   return (
     <div className="drawer__overlay">
       <div className="drawer__body">
@@ -11,18 +13,27 @@ function Drawer({ onClose }) {
           onClick={onClose}
         ></button>
         <div className="drawer__link-box">
-          <Link to="/" className="drawer__link drawer__link-main">
+          <Link
+            to="/"
+            className={`drawer__link drawer__link-main ${
+              pathname === '/' ? 'drawer__link-current' : ''
+            }`}
+          >
             Главная
           </Link>
           <Link
             to="/movies"
-            className="drawer__link drawer__link-movies drawer__link-current"
+            className={`drawer__link drawer__link-movies ${
+              pathname === '/movies' ? 'drawer__link-current' : ''
+            }`}
           >
             Фильмы
           </Link>
           <Link
             to="/saved-movies"
-            className="drawer__link drawer__link-saved-movies"
+            className={`drawer__link drawer__link-saved-movies ${
+              pathname === '/saved-movies' ? 'drawer__link-current' : ''
+            }`}
           >
             Сохранённые фильмы
           </Link>

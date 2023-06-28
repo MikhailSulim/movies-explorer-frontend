@@ -1,22 +1,18 @@
 import AboutMe from '../AboutMe/AboutMe';
 import AboutProject from '../AboutProject/AboutProject';
-import Footer from '../Footer/Footer';
 import Portfolio from '../Portfolio/Portfolio';
 import Promo from '../Promo/Promo';
 import Techs from '../Techs/Techs';
 
-function Main({isLogged}) {
-
-  
+function Main({onNavigateToAbout}) {
   return (
-    <>
-      <Promo isLogged={isLogged}/>
+    <main className='main'>
+      <Promo onNavigateToAbout={onNavigateToAbout}/>
       <AboutProject />
       <Techs />
       <AboutMe />
       <Portfolio />
-      <Footer/>
-    </>
+    </main>
   );
 }
 

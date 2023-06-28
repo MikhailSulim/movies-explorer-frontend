@@ -8,6 +8,8 @@ function SearchForm() {
         <div className="search__field">
           <input
             className="search__input"
+            name='search'
+            id='search'
             type="text"
             placeholder="Фильм"
             required

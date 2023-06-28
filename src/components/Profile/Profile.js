@@ -1,12 +1,10 @@
 import './Profile.css';
 import { Link } from 'react-router-dom';
-import Header from '../Header/Header';
 
 function Profile({ isLogged }) {
   return (
-    <section className="profile">
-      <Header isLogged={isLogged} />
-      <div className="profile__container">
+    <main className="profile">
+      <section className="profile__container">
         <h1 className="profile__title">Привет, Виталий!</h1>
         <form className="profile__form">
           <label className="profile__label">
@@ -15,13 +13,15 @@ function Profile({ isLogged }) {
               className="profile__input profile__input_type_name"
               type="text"
               defaultValue={'Виталий'}
+              minLength={2}
+              maxLength={30}
             />
           </label>
           <label className="profile__label">
             E-mail
             <input
               className="profile__input profile__input_type_email"
-              type="text"
+              type="email"
               defaultValue={'pochta@yandex.ru'}
             />
           </label>
@@ -35,8 +35,8 @@ function Profile({ isLogged }) {
         <Link to="/" className="profile__button profile__button_type_logout">
           Выйти из аккаунта
         </Link>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }
 
