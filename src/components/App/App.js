@@ -1,9 +1,4 @@
-import {
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-} from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
 import React, { useState } from 'react';
 import Profile from '../Profile/Profile';
@@ -15,10 +10,15 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import NotFound from '../NotFound/NotFound';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import { CurrentUserContext } from './../../contexts/CurrentUserContext';
+import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [currentUser, setCurrentUser] = useState({});
+
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const isPathWithHeader = [
@@ -43,58 +43,67 @@ function App() {
 
   function handleNavigateToAbout() {
     // navigate("#about");
-    document.getElementById('about').scrollIntoView()
+    document.getElementById('about').scrollIntoView();
   }
 
   return (
-    <div className="app">
-      {isPathWithHeader && (
-        <Header
-          isLogged={isLoggedIn}
-          onNavigateToSignin={handleNavigateToSignin}
-          onNavigateToSignup={handleNavigateToSignup}
-        />
-      )}
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="app">
+        {isPathWithHeader && (
+          <Header
+            isLogged={isLoggedIn}
+            onNavigateToSignin={handleNavigateToSignin}
+            onNavigateToSignup={handleNavigateToSignup}
+          />
+        )}
 
-      <Routes>
-        {/*отображается страница «О проекте»*/}
-        <Route
-          path="/"
-          element={<Main onNavigateToAbout={handleNavigateToAbout} />}
-        />
+        <Routes>
+          {/*отображается страница «О проекте»*/}
+          <Route
+            path="/"
+            element={<Main onNavigateToAbout={handleNavigateToAbout} />}
+          />
 
-        {/*отображается страница «Фильмы»*/}
-        <Route path="/movies" element={<Movies isLoading={isLoading} />} />
+          {/*отображается страница «Фильмы»*/}
 
-        {/*отображается страница «Сохранённые фильмы»*/}
-        <Route
-          path="/saved-movies"
-          element={<SavedMovies isLoading={isLoading} />}
-        />
+          {/* <Route path="/movies" element={<Movies isLoading={isLoading} />} /> */}
+          <Route
+            path="/movies"
+            element={<ProtectedRouteElement component={Movies} isLoggedIn={isLoggedIn} isLoading={isLoading}/>}
+          />
 
-        {/*отображается страница с профилем пользователя*/}
-        <Route path="/profile" element={<Profile />} />
+          {/*отображается страница «Сохранённые фильмы»*/}
+          <Route
+            path="/saved-movies"
+            // element={<SavedMovies isLoading={isLoading} />}
+            element={<ProtectedRouteElement component={SavedMovies} isLoggedIn={isLoggedIn} isLoading={isLoading} />}
+          />
 
-        {/*отображается страница авторизации*/}
-        <Route path="/signin" element={<Login />} />
+          {/*отображается страница с профилем пользователя*/}
+          {/* <Route path="/profile" element={<Profile />} /> */}
+          <Route path="/profile" element={<ProtectedRouteElement component={Profile}  />} />
 
-        {/*отображается страница регистрации*/}
-        <Route path="/signup" element={<Register />} />
+          {/*отображается страница авторизации*/}
+          <Route path="/signin" element={<Login />} />
 
-        <Route
-          path="*"
-          element={<NotFound onNavigateToMain={handleNavigateToMain} />}
-        />
+          {/*отображается страница регистрации*/}
+          <Route path="/signup" element={<Register />} />
 
-        {/*Защищать маршруты авторизацией пока не требуется. Достаточно наладить
+          <Route
+            path="*"
+            element={<NotFound onNavigateToMain={handleNavigateToMain} />}
+          />
+
+          {/*Защищать маршруты авторизацией пока не требуется. Достаточно наладить
         работу всех ссылок: нажатие на логотип ведёт на страницу «О проекте»;
         нажатие на «Фильмы» — на роут /movies; нажатие на «Сохранённые фильмы» —
         на роут /saved-movies; нажатие на «Регистрация», «Авторизация»,
         «Аккаунт» — на соответствующие роуты /signup, /signin и /profile.*/}
-      </Routes>
+        </Routes>
 
-      {isPathWithFooter && <Footer />}
-    </div>
+        {isPathWithFooter && <Footer />}
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
