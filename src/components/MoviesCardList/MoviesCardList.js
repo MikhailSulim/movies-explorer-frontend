@@ -1,5 +1,6 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import { MOVIES_IMAGE_URL } from '../../utils/constants';
 
 function MoviesCardList({moviesList, isSaved}) {
   return (
@@ -16,9 +17,10 @@ function MoviesCardList({moviesList, isSaved}) {
             length={`${Math.trunc(movie.duration / 60)}ч ${
               movie.duration % 60
             }м`}
-            img={`${process.env.PUBLIC_URL}/${movie.image}`}
-            checked={true}
+            img={`${MOVIES_IMAGE_URL}${movie.image.url}`}
+            checked={false}
             isSaved={isSaved}
+            key={movie.id}
           />
         ))}
       </ul>

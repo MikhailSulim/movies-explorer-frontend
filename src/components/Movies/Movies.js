@@ -1,10 +1,10 @@
 import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import { movies } from '../../utils/constants';
+// import { movies } from '../../utils/constants';
 import Preloader from '../Preloader/Preloader';
 
-function Movies({ isLoading }) {
+function Movies({ isLoading, movies }) {
   return (
     <>
       {isLoading ? (

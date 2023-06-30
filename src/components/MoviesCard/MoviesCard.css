@@ -28,6 +28,10 @@
   line-height: 18px;
   color: #fff;
   margin: 0;
+  max-width: 275px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .movie-card__length {

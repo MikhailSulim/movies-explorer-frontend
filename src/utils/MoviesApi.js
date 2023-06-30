@@ -1,5 +1,5 @@
 // Api для получения информации из общей базы данных фильмов
-import MOVIES_BASE_URL from './constants';
+import {MOVIES_BASE_URL} from './constants.js';
 
 class MoviesApi {
   constructor({ serverUrl, headers, credentials }) {

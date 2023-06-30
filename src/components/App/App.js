@@ -12,10 +12,12 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import { CurrentUserContext } from './../../contexts/CurrentUserContext';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
+import moviesApi from '../../utils/MoviesApi';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [movies, setMovies] = useState([]);
 
   const [currentUser, setCurrentUser] = useState({});
 
@@ -28,6 +30,13 @@ function App() {
     '/profile',
   ].includes(pathname);
   const isPathWithFooter = ['/', '/movies', '/saved-movies'].includes(pathname);
+
+  React.useEffect(() => {
+    moviesApi.getMovies().then((res) => {
+      console.log(res);
+      setMovies(res);
+    });
+  }, []);
 
   function handleNavigateToSignin() {
     navigate('/signin');
@@ -69,19 +78,35 @@ function App() {
           {/* <Route path="/movies" element={<Movies isLoading={isLoading} />} /> */}
           <Route
             path="/movies"
-            element={<ProtectedRouteElement component={Movies} isLoggedIn={isLoggedIn} isLoading={isLoading}/>}
+            element={
+              <ProtectedRouteElement
+                component={Movies}
+                isLoggedIn={isLoggedIn}
+                isLoading={isLoading}
+                movies={movies}
+              />
+            }
           />
 
           {/*отображается страница «Сохранённые фильмы»*/}
           <Route
             path="/saved-movies"
             // element={<SavedMovies isLoading={isLoading} />}
-            element={<ProtectedRouteElement component={SavedMovies} isLoggedIn={isLoggedIn} isLoading={isLoading} />}
+            element={
+              <ProtectedRouteElement
+                component={SavedMovies}
+                isLoggedIn={isLoggedIn}
+                isLoading={isLoading}
+              />
+            }
           />
 
           {/*отображается страница с профилем пользователя*/}
           {/* <Route path="/profile" element={<Profile />} /> */}
-          <Route path="/profile" element={<ProtectedRouteElement component={Profile}  />} />
+          <Route
+            path="/profile"
+            element={<ProtectedRouteElement component={Profile} />}
+          />
 
           {/*отображается страница авторизации*/}
           <Route path="/signin" element={<Login />} />
