@@ -1,3 +1,6 @@
+// адрес сервера с базой данных всех фильмов
+export const MOVIES_BASE_URL = 'https://api.nomoreparties.co/beatfilm-movies'; 
+
 export const movies1 = [];
 
 export const movies = [
