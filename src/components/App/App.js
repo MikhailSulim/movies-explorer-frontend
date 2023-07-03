@@ -13,13 +13,16 @@ import Footer from '../Footer/Footer';
 import { CurrentUserContext } from './../../contexts/CurrentUserContext';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 import moviesApi from '../../utils/MoviesApi';
+import mainApi from '../../utils/MainApi';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
 
   const [currentUser, setCurrentUser] = useState({});
+  const [userLogin, setUserLogin] = useState(null);
+  const [isValidAuth, setIsValidAuth] = useState(false);
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -31,12 +34,102 @@ function App() {
   ].includes(pathname);
   const isPathWithFooter = ['/', '/movies', '/saved-movies'].includes(pathname);
 
+  // React.useEffect(() => {
+  //   moviesApi.getMovies().then((res) => {
+  //     console.log(res);
+  //     setMovies(res);
+  //   });
+  // }, []);
+
+  // функции для авторизации на сайте
+  function cbRegister({ name, email, password }) {
+    // регистрация
+    mainApi
+      .register(name, email, password)
+      .then(() => {
+        // setIsLoggedIn(true);
+        // localStorage.setItem('authorized', 'true');
+        navigate('/signin', { replace: true });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function cbLogin({ email, password }) {
+    // авторизация
+    mainApi
+      .authorize(email, password)
+      .then(() => {
+        setIsLoggedIn(true);
+        localStorage.setItem('authorized', 'true');
+        navigate('/', { replace: true });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function cbLogout() {
+    mainApi
+      .signout()
+      .then(() => {
+        localStorage.clear();
+        setIsLoggedIn(false);
+        navigate('/', { replace: true });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const checkToken = React.useCallback(() => {
+    // если пользователь авторизован,
+    // эта функция проверит, есть ли данные в req.user._id на сервере
+    const isAuthorized = localStorage.getItem('isAuthorized');
+    if (isAuthorized) {
+      // проверим, есть ли данные в req.user._id
+      mainApi
+        .getContent()
+        .then((userData) => {
+          if (userData.email) {
+            // авторизуем пользователя
+            setIsLoggedIn(true);
+            setUserLogin(userData.email);
+            navigate('/', { replace: true });
+          }
+        })
+        .catch((err) => {
+          console.log(err); // выведем ошибку в консоль
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(false);
+    }
+  }, [navigate]);
+
   React.useEffect(() => {
-    moviesApi.getMovies().then((res) => {
-      console.log(res);
-      setMovies(res);
-    });
-  }, []);
+    checkToken();
+    isLoggedIn &&
+      moviesApi.getMovies().then((res) => {
+        console.log(res);
+        setMovies(res);
+      });
+   
+
+    // api
+    //     .getAllData()
+    //     .then((res) => {
+    //       const [initialCards, userData] = res;
+    //       setCurrentUser(userData);
+    //       setCards(initialCards.reverse());
+    //     })
+    //     .catch((error) => console.error('error', error));
+  }, [checkToken, isLoggedIn]);
+
+  ///////////////////////////////////
 
   function handleNavigateToSignin() {
     navigate('/signin');
@@ -105,14 +198,17 @@ function App() {
           {/* <Route path="/profile" element={<Profile />} /> */}
           <Route
             path="/profile"
-            element={<ProtectedRouteElement component={Profile} />}
+            element={<ProtectedRouteElement component={Profile} onLogout={cbLogout}/>}
           />
 
           {/*отображается страница авторизации*/}
-          <Route path="/signin" element={<Login />} />
+          <Route path="/signin" element={<Login onLogin={cbLogin} />} />
 
           {/*отображается страница регистрации*/}
-          <Route path="/signup" element={<Register />} />
+          <Route
+            path="/signup"
+            element={<Register onRegister={cbRegister} />}
+          />
 
           <Route
             path="*"

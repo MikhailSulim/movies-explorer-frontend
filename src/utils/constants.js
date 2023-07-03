@@ -1,6 +1,7 @@
-// адрес сервера с базой данных всех фильмов
+// адреса используемых серверов
 export const MOVIES_BASE_URL = 'https://api.nomoreparties.co/beatfilm-movies'; 
 export const MOVIES_IMAGE_URL = 'https://api.nomoreparties.co';
+export const MAIN_API_URL = 'https://api.sulim.yp-diploma.nomoredomains.rocks';
 
 
 export const saved_movies = [

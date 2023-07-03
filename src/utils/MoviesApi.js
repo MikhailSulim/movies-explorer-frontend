@@ -1,11 +1,10 @@
 // Api для получения информации из общей базы данных фильмов
-import {MOVIES_BASE_URL} from './constants.js';
+import { MOVIES_BASE_URL } from './constants.js';
 
 class MoviesApi {
-  constructor({ serverUrl, headers, credentials }) {
-    this.serverUrl = serverUrl;
-    this.headers = headers;
-    this.credentials = credentials;
+  constructor({ serverUrl, headers }) {
+    this._serverUrl = serverUrl;
+    this._headers = headers;
   }
 
   _checkResponse(res) {
@@ -22,9 +21,9 @@ class MoviesApi {
 
   // получение данных о фильмах
   getMovies() {
-    return this._request(this.serverUrl, {
+    return this._request(this._serverUrl, {
       method: 'GET',
-      headers: this.headers,
+      headers: this._headers,
     });
   }
 }
@@ -32,7 +31,7 @@ class MoviesApi {
 const moviesApi = new MoviesApi({
   serverUrl: MOVIES_BASE_URL,
   headers: {
-    // 'Accept': 'application/json',
+    Accept: 'application/json',
     'Content-Type': 'application/json',
   },
 });
