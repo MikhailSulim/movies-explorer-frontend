@@ -24,7 +24,7 @@ function Register({ isLoggedIn, onRegister }) {
   );
 
   if (isLoggedIn) {
-    return <Navigate to="/" />;
+    return <Navigate to="/signin" />;
   }
 
   return (

@@ -21,8 +21,8 @@ function App() {
   const [movies, setMovies] = useState([]);
 
   const [currentUser, setCurrentUser] = useState({});
-  const [userLogin, setUserLogin] = useState(null);
-  const [isValidAuth, setIsValidAuth] = useState(false);
+  // const [userInfo, setUserInfo] = useState(null);
+  // const [isValidAuth, setIsValidAuth] = useState(false);
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -34,12 +34,7 @@ function App() {
   ].includes(pathname);
   const isPathWithFooter = ['/', '/movies', '/saved-movies'].includes(pathname);
 
-  // React.useEffect(() => {
-  //   moviesApi.getMovies().then((res) => {
-  //     console.log(res);
-  //     setMovies(res);
-  //   });
-  // }, []);
+
 
   // функции для авторизации на сайте
   function cbRegister({ name, email, password }) {
@@ -48,7 +43,6 @@ function App() {
       .register(name, email, password)
       .then(() => {
         // setIsLoggedIn(true);
-        // localStorage.setItem('authorized', 'true');
         navigate('/signin', { replace: true });
       })
       .catch((err) => {
@@ -62,7 +56,7 @@ function App() {
       .authorize(email, password)
       .then(() => {
         setIsLoggedIn(true);
-        localStorage.setItem('authorized', 'true');
+        localStorage.setItem('isAuthorized', 'true');
         navigate('/', { replace: true });
       })
       .catch((err) => {
@@ -74,7 +68,7 @@ function App() {
     mainApi
       .signout()
       .then(() => {
-        localStorage.clear();
+        localStorage.removeItem('isAuthorized');
         setIsLoggedIn(false);
         navigate('/', { replace: true });
       })
@@ -83,50 +77,60 @@ function App() {
       });
   }
 
+  function handleUpdateUser({ name, email }) {
+    mainApi
+      .setUserInfo(name, email)
+      .then((newUserData) => {
+        setCurrentUser(newUserData);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
   const checkToken = React.useCallback(() => {
     // если пользователь авторизован,
     // эта функция проверит, есть ли данные в req.user._id на сервере
     const isAuthorized = localStorage.getItem('isAuthorized');
+
     if (isAuthorized) {
       // проверим, есть ли данные в req.user._id
       mainApi
-        .getContent()
+        .getUserData()
         .then((userData) => {
+          // setUserInfo(userData);
+          console.log('userdata', userData);
           if (userData.email) {
             // авторизуем пользователя
             setIsLoggedIn(true);
-            setUserLogin(userData.email);
-            navigate('/', { replace: true });
+            // setUserInfo(userData);
+            // console.log(userInfo);
+            // navigate('/', { replace: true });
           }
         })
         .catch((err) => {
-          console.log(err); // выведем ошибку в консоль
+          console.error(err); // выведем ошибку в консоль
         })
         .finally(() => {
-          setIsLoading(false);
+          // setIsLoading(false);
         });
     } else {
       setIsLoading(false);
     }
-  }, [navigate]);
+  }, []);
 
   React.useEffect(() => {
     checkToken();
     isLoggedIn &&
-      moviesApi.getMovies().then((res) => {
-        console.log(res);
-        setMovies(res);
-      });
-   
-
-    // api
-    //     .getAllData()
-    //     .then((res) => {
-    //       const [initialCards, userData] = res;
-    //       setCurrentUser(userData);
-    //       setCards(initialCards.reverse());
-    //     })
-    //     .catch((error) => console.error('error', error));
+      Promise.all([mainApi.getUserData(), moviesApi.getMovies()])
+        .then(([userData, movies]) => {
+          // console.log(userData);
+          setCurrentUser(userData);
+          setMovies(movies);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
   }, [checkToken, isLoggedIn]);
 
   ///////////////////////////////////
@@ -144,7 +148,6 @@ function App() {
   }
 
   function handleNavigateToAbout() {
-    // navigate("#about");
     document.getElementById('about').scrollIntoView();
   }
 
@@ -198,16 +201,28 @@ function App() {
           {/* <Route path="/profile" element={<Profile />} /> */}
           <Route
             path="/profile"
-            element={<ProtectedRouteElement component={Profile} onLogout={cbLogout}/>}
+            element={
+              <ProtectedRouteElement
+                component={Profile}
+                isLoggedIn={isLoggedIn}
+                onLogout={cbLogout}
+                onUpdateUser={handleUpdateUser}
+              />
+            }
           />
 
           {/*отображается страница авторизации*/}
-          <Route path="/signin" element={<Login onLogin={cbLogin} />} />
+          <Route
+            path="/signin"
+            element={<Login isLoggedIn={isLoggedIn} onLogin={cbLogin} />}
+          />
 
           {/*отображается страница регистрации*/}
           <Route
             path="/signup"
-            element={<Register onRegister={cbRegister} />}
+            element={
+              <Register isLoggedIn={isLoggedIn} onRegister={cbRegister} />
+            }
           />
 
           <Route

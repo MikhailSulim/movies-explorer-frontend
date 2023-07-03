@@ -50,6 +50,25 @@ class MainApi {
       credentials: this._credentials,
     });
   }
+
+  getUserData() {
+    // функция получения данных о пользователе
+    return this._request('/users/me', {
+      method: 'GET',
+      headers: this._headers,
+      credentials: this._credentials,
+    });
+  }
+
+  setUserInfo(name, email) {
+    // функция замены данных пользователя на сервере
+    return this._request('/users/me', {
+      method: 'PATCH',
+      headers: this._headers,
+      credentials: this._credentials,
+      body: JSON.stringify({ name, email }),
+    });
+  }
 }
 
 const mainApi = new MainApi({
