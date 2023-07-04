@@ -5,12 +5,14 @@ import useFormValidate from '../../hooks/useFormValidate';
 function SearchForm({}) {
   const { values, errors, onChange, resetValidation } = useFormValidate();
 
-
+function handleSubmit(e) {
+  e.preventDefault();
+}
 
 
   return (
     <div className="search">
-      <form className="search__form" name="search__form" >
+      <form className="search__form" name="search__form" onSubmit={handleSubmit}>
         <div className="search__field">
           <input
             className="search__input"

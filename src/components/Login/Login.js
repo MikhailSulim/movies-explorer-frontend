@@ -1,27 +1,23 @@
 import './Login.css';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import Logo from '../Logo/Logo';
+import useFormValidate from '../../hooks/useFormValidate';
+import SubmitFormBtn from '../SubmitFormBtn/SubmitFormBtn';
 
 function Login({ isLoggedIn, onLogin }) {
-  const [userLoginData, setUserLoginData] = useState({ email: '', password: '' });
-
-  const onChange = useCallback(
-    (e) => {
-      const { name, value } = e.target;
-      setUserLoginData({ ...userLoginData, [name]: value });
-    },
-    [userLoginData]
-  );
+  const { values, errors, onChange, resetValidation, isFormValid } =
+    useFormValidate();
 
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      onLogin(userLoginData);
+      onLogin(values);
+      resetValidation();
     },
-    [onLogin, userLoginData]
+    [onLogin, resetValidation, values]
   );
 
   if (isLoggedIn) {
@@ -30,41 +26,40 @@ function Login({ isLoggedIn, onLogin }) {
 
   return (
     <main className="login">
-      <section className="login__container">
-        <Logo />
-        <h1 className="login__title">Рады видеть!</h1>
-        <form className="login__form" name="login__form" onSubmit={onSubmit}>
+      <form className="login__form" name="login__form" onSubmit={onSubmit}>
+        <div className="login__up">
+          <Logo />
+          <h1 className="login__title">Рады видеть!</h1>
           <Input
             name="email"
             label="E-mail"
-            isValid={true}
+            isValid={!errors.email}
             type="email"
-            error=""
+            error={errors.email || ''}
             onChange={onChange}
-            value={userLoginData.email}
+            value={values.email || ''}
           />
           <Input
             name="password"
             label="Пароль"
-            isValid={true}
+            isValid={!errors.password}
             type="password"
-            error=""
+            error={errors.password || ''}
             minLength={8}
             onChange={onChange}
-            value={userLoginData.password}
+            value={values.password || ''}
           />
-
-          <button type="submit" className="login__button">
-            Войти
-          </button>
-        </form>
-        <span className="login__text">
-          Ещё не зарегистрированы?
-          <Link to="/signup" className="login__text-signup">
-            Регистрация
-          </Link>
-        </span>
-      </section>
+        </div>
+        <div className="login__down">
+          <SubmitFormBtn btnText={'Войти'} isEnable={isFormValid} />
+          <span className="login__text">
+            Ещё не зарегистрированы?
+            <Link to="/signup" className="login__text-signup">
+              Регистрация
+            </Link>
+          </span>
+        </div>
+      </form>
     </main>
   );
 }

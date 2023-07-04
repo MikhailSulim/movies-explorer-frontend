@@ -2,25 +2,22 @@ import './Register.css';
 import { Link, Navigate } from 'react-router-dom';
 import Input from '../Input/Input';
 import Logo from '../Logo/Logo';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
+import SubmitFormBtn from '../SubmitFormBtn/SubmitFormBtn';
+import useFormValidate from '../../hooks/useFormValidate';
 
 function Register({ isLoggedIn, onRegister }) {
-  const [userRegisterData, setUserRegisterData] = useState({ name: '', email: '', password: '' });
-
-  const onChange = useCallback(
-    (e) => {
-      const { name, value } = e.target;
-      setUserRegisterData({ ...userRegisterData, [name]: value });
-    },
-    [userRegisterData]
-  );
+  const { values, errors, onChange, resetValidation, isFormValid } =
+    useFormValidate();
 
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      onRegister(userRegisterData);
+      console.log(values);
+      onRegister(values);
+      resetValidation();
     },
-    [onRegister, userRegisterData]
+    [onRegister, resetValidation, values]
   );
 
   if (isLoggedIn) {
@@ -29,56 +26,63 @@ function Register({ isLoggedIn, onRegister }) {
 
   return (
     <main className="register">
-      <section className="register__container">
-        <Logo />
-        <h1 className="register__title">Добро пожаловать!</h1>
-        <form
-          className="register__form"
-          name="register__form"
-          onSubmit={onSubmit}
-        >
+      <form
+        className="register__form"
+        name="register__form"
+        onSubmit={onSubmit}
+      >
+        <div className="register__up">
+          <Logo />
+          <h1 className="register__title">Добро пожаловать!</h1>
           <Input
             name="name"
             label="Имя"
-            error=""
-            isValid={true}
+            error={errors.name || ''}
+            isValid={!errors.name}
             type="text"
             minLength={2}
             maxLength={30}
             onChange={onChange}
+            value={values.name || ''}
           />
           <Input
             name="email"
             label="E-mail"
-            error=""
-            isValid={true}
+            error={errors.email || ''}
+            isValid={!errors.email}
             type="email"
             onChange={onChange}
+            value={values.email || ''}
           />
 
           <Input
             name="password"
             label="Пароль"
-            error="Что-то пошло не так..."
-            isValid={false}
+            error={errors.password}
+            isValid={!errors.password}
             type="password"
             minLength={8}
             onChange={onChange}
+            value={values.password || ''}
           />
-
-          <button type="submit" className="register__button">
-            Зарегистрироваться
-          </button>
-        </form>
-        <span className="register__text">
-          Уже зарегистрированы?
-          <Link to="/signin" className="register__text-signin">
-            Войти
-          </Link>
-        </span>
-      </section>
+        </div>
+        <div className="register__down">
+          <SubmitFormBtn
+            btnText={'Зарегистрироваться'}
+            isEnable={isFormValid}
+          />
+          <span className="register__text">
+            Уже зарегистрированы?
+            <Link to="/signin" className="register__text-signin">
+              Войти
+            </Link>
+          </span>
+        </div>
+      </form>
     </main>
   );
 }
 
 export default Register;
+
+// TODO разная валидация на сервере и фронте для email, необходимо для фронта сделать такую же как на бэке
