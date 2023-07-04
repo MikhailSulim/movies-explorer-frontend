@@ -23,7 +23,6 @@ class MainApi {
   }
 
   register(name, email, password) {
-    console.log(name);
     // функция регистрации нового пользователя
     return this._request('/signup', {
       method: 'POST',

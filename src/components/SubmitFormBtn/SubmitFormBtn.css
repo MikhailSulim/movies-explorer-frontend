@@ -2,7 +2,7 @@
   background-color: #4285f4;
   height: 45px;
   border-radius: 3px;
-  margin: 0 0 16px;
+  margin: 10px 0 16px;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -27,7 +27,7 @@
 
 @media screen and (max-width: 570px) {
   .submit-form-btn {
-    margin: 0 0 13px;
+    margin: 8px 0 13px;
     font-size: 12px;
     line-height: 15px;
   }

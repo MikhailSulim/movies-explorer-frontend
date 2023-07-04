@@ -1,28 +1,23 @@
 import './Register.css';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import Logo from '../Logo/Logo';
 import { useCallback } from 'react';
 import SubmitFormBtn from '../SubmitFormBtn/SubmitFormBtn';
 import useFormValidate from '../../hooks/useFormValidate';
 
-function Register({ isLoggedIn, onRegister }) {
+function Register({ onRegister, errorText, isLoading }) {
   const { values, errors, onChange, resetValidation, isFormValid } =
     useFormValidate();
 
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      console.log(values);
       onRegister(values);
       resetValidation();
     },
     [onRegister, resetValidation, values]
   );
-
-  if (isLoggedIn) {
-    return <Navigate to="/signin" />;
-  }
 
   return (
     <main className="register">
@@ -44,6 +39,8 @@ function Register({ isLoggedIn, onRegister }) {
             maxLength={30}
             onChange={onChange}
             value={values.name || ''}
+            pattern='[A-Za-zА-Яа-яЁё\-\s]{1,30}'
+            title='Имя должно содержит только латиницу, кириллицу, пробел или дефис'
           />
           <Input
             name="email"
@@ -53,6 +50,8 @@ function Register({ isLoggedIn, onRegister }) {
             type="email"
             onChange={onChange}
             value={values.email || ''}
+            pattern='[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$'
+            title='Email должен быть в формате example@example.com'
           />
 
           <Input
@@ -67,8 +66,11 @@ function Register({ isLoggedIn, onRegister }) {
           />
         </div>
         <div className="register__down">
+          <span id="text-error" className="register__text-error">
+            {errorText}
+          </span>
           <SubmitFormBtn
-            btnText={'Зарегистрироваться'}
+            btnText={`${isLoading ? 'Регистрация...' : 'Зарегистрироваться'}`}
             isEnable={isFormValid}
           />
           <span className="register__text">
@@ -85,4 +87,3 @@ function Register({ isLoggedIn, onRegister }) {
 
 export default Register;
 
-// TODO разная валидация на сервере и фронте для email, необходимо для фронта сделать такую же как на бэке

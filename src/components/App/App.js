@@ -10,7 +10,6 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import NotFound from '../NotFound/NotFound';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import { CurrentUserContext } from './../../contexts/CurrentUserContext';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 import moviesApi from '../../utils/MoviesApi';
@@ -27,11 +26,8 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState({});
   // const [userInfo, setUserInfo] = useState(null);
-  // const [isValidAuth, setIsValidAuth] = useState(false);
 
-  // для попапа
-  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
-  const [textMessageInfoTooltip, setTextMessageInfoTooltip] = useState('');
+  const [textErrorSubmit, setTextErrorSubmit] = useState('');
 
   // авторизация
   const [isValidAuth, setIsValidAuth] = useState(false);
@@ -49,37 +45,43 @@ function App() {
   // ----------------------- Авторизация ------------------------- //
   function cbRegister({ name, email, password }) {
     // регистрация
+    setIsLoading(true);
+    setTextErrorSubmit('');
     mainApi
       .register(name, email, password)
       .then((res) => {
-        // setIsLoggedIn(true);
-        setIsValidAuth(true);
-        setTextMessageInfoTooltip('Вы успешно зарегистрировались!');
-        setIsInfoTooltipOpen(!isInfoTooltipOpen);
-        navigate('/signin', { replace: true });
+        cbLogin({ email, password });
       })
       .catch((err) => {
-        console.log(err);
-        setIsValidAuth(false);
-        setTextMessageInfoTooltip(ERR_MESSAGE);
-        setIsInfoTooltipOpen(!isInfoTooltipOpen);
+        setTextErrorSubmit(ERR_MESSAGE);
+        console.error(err);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
       });
   }
 
   function cbLogin({ email, password }) {
     // авторизация
+    setIsLoading(true);
+    setTextErrorSubmit('');
     mainApi
       .authorize(email, password)
       .then(() => {
         setIsLoggedIn(true);
         localStorage.setItem('isAuthorized', 'true');
-        navigate('/', { replace: true });
+        navigate('/movies', { replace: true });
       })
       .catch((err) => {
+        setTextErrorSubmit(ERR_MESSAGE);
         console.log(err);
-        setIsValidAuth(false);
-        setTextMessageInfoTooltip(ERR_MESSAGE);
-        setIsInfoTooltipOpen(!isInfoTooltipOpen);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
       });
   }
 
@@ -172,11 +174,7 @@ function App() {
     document.getElementById('about').scrollIntoView();
   }
 
-  function closePopup() {
-    setIsInfoTooltipOpen(false);
-  }
-
-
+  
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -241,14 +239,26 @@ function App() {
           {/*отображается страница авторизации*/}
           <Route
             path="/signin"
-            element={<Login isLoggedIn={isLoggedIn} onLogin={cbLogin} />}
+            element={
+              <Login
+                isLoggedIn={isLoggedIn}
+                onLogin={cbLogin}
+                errorText={textErrorSubmit}
+                isLoading={isLoading}
+              />
+            }
           />
 
           {/*отображается страница регистрации*/}
           <Route
             path="/signup"
             element={
-              <Register isLoggedIn={isLoggedIn} onRegister={cbRegister} />
+              <Register
+                isLoggedIn={isLoggedIn}
+                onRegister={cbRegister}
+                errorText={textErrorSubmit}
+                isLoading={isLoading}
+              />
             }
           />
 
@@ -265,13 +275,6 @@ function App() {
         </Routes>
 
         {isPathWithFooter && <Footer />}
-
-        <InfoTooltip
-          isOpen={isInfoTooltipOpen}
-          onClose={closePopup}
-          textMessage={textMessageInfoTooltip}
-          isValidAuth={isValidAuth}
-        />
       </div>
     </CurrentUserContext.Provider>
   );

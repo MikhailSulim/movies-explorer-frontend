@@ -1,13 +1,12 @@
 import './Login.css';
 import { useCallback } from 'react';
-import { Navigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import Logo from '../Logo/Logo';
 import useFormValidate from '../../hooks/useFormValidate';
 import SubmitFormBtn from '../SubmitFormBtn/SubmitFormBtn';
 
-function Login({ isLoggedIn, onLogin }) {
+function Login({ onLogin, errorText, isLoading }) {
   const { values, errors, onChange, resetValidation, isFormValid } =
     useFormValidate();
 
@@ -19,10 +18,6 @@ function Login({ isLoggedIn, onLogin }) {
     },
     [onLogin, resetValidation, values]
   );
-
-  if (isLoggedIn) {
-    return <Navigate to="/" />;
-  }
 
   return (
     <main className="login">
@@ -38,6 +33,8 @@ function Login({ isLoggedIn, onLogin }) {
             error={errors.email || ''}
             onChange={onChange}
             value={values.email || ''}
+            pattern='[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$'
+            title='Email должен быть в формате example@example.com'
           />
           <Input
             name="password"
@@ -51,7 +48,11 @@ function Login({ isLoggedIn, onLogin }) {
           />
         </div>
         <div className="login__down">
-          <SubmitFormBtn btnText={'Войти'} isEnable={isFormValid} />
+          <span className="register__text-error">{errorText}</span>
+          <SubmitFormBtn
+            btnText={`${isLoading ? 'Авторизация...' : 'Войти'}`}
+            isEnable={isFormValid}
+          />
           <span className="login__text">
             Ещё не зарегистрированы?
             <Link to="/signup" className="login__text-signup">

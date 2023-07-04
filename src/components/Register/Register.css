@@ -43,6 +43,16 @@
   flex-direction: column;
 }
 
+.register__text-error {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ee3465;
+  text-align: center;
+  padding-bottom: 6px;
+}
+
 .register__text {
   font-style: normal;
   font-weight: 400;
@@ -81,6 +91,11 @@
     margin: 50px 0;
     width: 100%;
     text-align: center;
+  }
+
+  .register__text-error {
+    font-size: 12px;
+    line-height: 15px;
   }
 
   .register__text {
