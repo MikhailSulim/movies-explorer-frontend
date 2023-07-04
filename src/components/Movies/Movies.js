@@ -6,19 +6,11 @@ import Preloader from '../Preloader/Preloader';
 
 function Movies({ isLoading, movies }) {
   return (
-    <>
-      {isLoading ? (
-        <Preloader />
-      ) : (
-        <main className="movies-main">
-          <SearchForm />
-          <MoviesCardList moviesList={movies} />
-          <button type="button" className="movies-list-btn">
-            Ещё
-          </button>
-        </main>
-      )}
-    </>
+    <main className="movies-main">
+      
+      <SearchForm />
+      {isLoading ? <Preloader /> : <MoviesCardList moviesList={movies} isNoMoreMovies={false} />}
+    </main>
   );
 }
 

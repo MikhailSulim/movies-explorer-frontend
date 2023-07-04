@@ -10,19 +10,31 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import NotFound from '../NotFound/NotFound';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import { CurrentUserContext } from './../../contexts/CurrentUserContext';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 
 function App() {
+  const ERR_MESSAGE = 'Что-то пошло не так! Попробуйте ещё раз.';
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
 
+  const [foundMovies, setFoundMovies] = useState([]);
+  const [initialMovies, setInitialMovies] = useState([]);
+
   const [currentUser, setCurrentUser] = useState({});
   // const [userInfo, setUserInfo] = useState(null);
   // const [isValidAuth, setIsValidAuth] = useState(false);
+
+  // для попапа
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  const [textMessageInfoTooltip, setTextMessageInfoTooltip] = useState('');
+
+  // авторизация
+  const [isValidAuth, setIsValidAuth] = useState(false);
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -34,19 +46,23 @@ function App() {
   ].includes(pathname);
   const isPathWithFooter = ['/', '/movies', '/saved-movies'].includes(pathname);
 
-
-
-  // функции для авторизации на сайте
+  // ----------------------- Авторизация ------------------------- //
   function cbRegister({ name, email, password }) {
     // регистрация
     mainApi
       .register(name, email, password)
-      .then(() => {
+      .then((res) => {
         // setIsLoggedIn(true);
+        setIsValidAuth(true);
+        setTextMessageInfoTooltip('Вы успешно зарегистрировались!');
+        setIsInfoTooltipOpen(!isInfoTooltipOpen);
         navigate('/signin', { replace: true });
       })
       .catch((err) => {
         console.log(err);
+        setIsValidAuth(false);
+        setTextMessageInfoTooltip(ERR_MESSAGE);
+        setIsInfoTooltipOpen(!isInfoTooltipOpen);
       });
   }
 
@@ -61,10 +77,14 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        setIsValidAuth(false);
+        setTextMessageInfoTooltip(ERR_MESSAGE);
+        setIsInfoTooltipOpen(!isInfoTooltipOpen);
       });
   }
 
   function cbLogout() {
+    // выход из системы
     mainApi
       .signout()
       .then(() => {
@@ -78,6 +98,7 @@ function App() {
   }
 
   function handleUpdateUser({ name, email }) {
+    // редактирование данных
     mainApi
       .setUserInfo(name, email)
       .then((newUserData) => {
@@ -151,6 +172,12 @@ function App() {
     document.getElementById('about').scrollIntoView();
   }
 
+  function closePopup() {
+    setIsInfoTooltipOpen(false);
+  }
+
+
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
@@ -179,7 +206,7 @@ function App() {
                 component={Movies}
                 isLoggedIn={isLoggedIn}
                 isLoading={isLoading}
-                movies={movies}
+                movies={initialMovies}
               />
             }
           />
@@ -238,6 +265,13 @@ function App() {
         </Routes>
 
         {isPathWithFooter && <Footer />}
+
+        <InfoTooltip
+          isOpen={isInfoTooltipOpen}
+          onClose={closePopup}
+          textMessage={textMessageInfoTooltip}
+          isValidAuth={isValidAuth}
+        />
       </div>
     </CurrentUserContext.Provider>
   );

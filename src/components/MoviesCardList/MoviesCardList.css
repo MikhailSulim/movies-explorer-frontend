@@ -21,7 +21,37 @@
 .movies-list__notfound {
   text-align: center;
   color: #fff;
-  
+}
+
+.movies-list__btn-field {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  min-height: 110px;
+}
+
+.movies-list__btn-more {
+  cursor: pointer;
+  width: 320px;
+  height: 36px;
+  margin: 0 auto 100px;
+  border-radius: 6px;
+  background-color: #2f2f2f;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.movies-list__btn-more_visible_none {
+  display: none;
+}
+
+.movies-list__btn-more:hover {
+  background-color: #3ddc84;
 }
 
 @media screen and (max-width: 1024px) {
@@ -47,5 +77,18 @@
 @media screen and (max-width: 570px) {
   .movies-list {
     padding: 52px 10px 0px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .movies-list__btn-more {
+    margin: 0 auto 80px;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .movies-list__btn-more {
+    margin: 0 auto 80px;
+    max-width: 240px;
   }
 }

@@ -2,7 +2,7 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { MOVIES_IMAGE_URL } from '../../utils/constants';
 
-function MoviesCardList({moviesList, isSaved}) {
+function MoviesCardList({ moviesList, isSaved, isNoMoreMovies }) {
   return (
     <section className="movies-list">
       {moviesList.length === 0 && (
@@ -24,6 +24,16 @@ function MoviesCardList({moviesList, isSaved}) {
           />
         ))}
       </ul>
+      <div className="movies-list__btn-field">
+        <button
+          type="button"
+          className={`movies-list__btn-more ${
+            isNoMoreMovies ? 'movies-list__btn-more_visible_none' : ''
+          }`}
+        >
+          Ещё
+        </button>
+      </div>
     </section>
   );
 }

@@ -7,15 +7,18 @@ import Preloader from '../Preloader/Preloader';
 function SavedMovies({ isLoading }) {
   return (
     <>
-      {isLoading ? (
-        <Preloader />
-      ) : (
-        <main className="saved-movies-main">
-          <SearchForm />
-          <MoviesCardList moviesList={saved_movies} isSaved={true} />
-          <div className="saved-movies-list-space"></div>
-        </main>
-      )}
+      <main className="saved-movies-main">
+        <SearchForm />
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <MoviesCardList
+            moviesList={saved_movies}
+            isSaved={true}
+            isNoMoreMovies={true}
+          />
+        )}
+      </main>
     </>
   );
 }

@@ -1,14 +1,12 @@
 import './Profile.css';
 import { Link } from 'react-router-dom';
-import { useContext, useState, useCallback, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import useFormValidate from '../../hooks/useFormValidate';
 
 function Profile({ isLogged, onLogout, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);
-  // const [userData, setUserData] = useState({ email: '', password: '' });
-  const { values, errors, onChange, resetValidation, isFormValid } =
-    useFormValidate();
+  const { values, onChange, resetValidation } = useFormValidate();
 
   useEffect(() => {
     resetValidation(
@@ -34,7 +32,7 @@ function Profile({ isLogged, onLogout, onUpdateUser }) {
             Имя
             <input
               id="input-name"
-              name='name'
+              name="name"
               className="profile__input profile__input_type_name"
               type="text"
               value={values.name || ''}
@@ -48,7 +46,7 @@ function Profile({ isLogged, onLogout, onUpdateUser }) {
             E-mail
             <input
               id="input-email"
-              name='email'
+              name="email"
               className="profile__input profile__input_type_email"
               type="email"
               required
