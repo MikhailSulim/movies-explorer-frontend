@@ -10,6 +10,7 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import NotFound from '../NotFound/NotFound';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import { CurrentUserContext } from './../../contexts/CurrentUserContext';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
 import moviesApi from '../../utils/MoviesApi';
@@ -21,11 +22,14 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
 
-  const [foundMovies, setFoundMovies] = useState([]);
+  // const [foundMovies, setFoundMovies] = useState([]);
   const [initialMovies, setInitialMovies] = useState([]);
 
   const [currentUser, setCurrentUser] = useState({});
   // const [userInfo, setUserInfo] = useState(null);
+
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  const [textMessageInfoTooltip, setTextMessageInfoTooltip] = useState('');
 
   const [textErrorSubmit, setTextErrorSubmit] = useState('');
 
@@ -101,13 +105,20 @@ function App() {
 
   function handleUpdateUser({ name, email }) {
     // редактирование данных
+    setIsLoading(true);
     mainApi
       .setUserInfo(name, email)
       .then((newUserData) => {
         setCurrentUser(newUserData);
+        setTextMessageInfoTooltip('Профиль успешно отредактирован!');
+        setIsValidAuth(true);
+        setIsInfoTooltipOpen(true);
       })
       .catch((err) => {
         console.error(err);
+        setIsValidAuth(false);
+        setTextMessageInfoTooltip(ERR_MESSAGE);
+        setIsInfoTooltipOpen(true);
       });
   }
 
@@ -121,14 +132,9 @@ function App() {
       mainApi
         .getUserData()
         .then((userData) => {
-          // setUserInfo(userData);
-          console.log('userdata', userData);
           if (userData.email) {
             // авторизуем пользователя
             setIsLoggedIn(true);
-            // setUserInfo(userData);
-            // console.log(userInfo);
-            // navigate('/', { replace: true });
           }
         })
         .catch((err) => {
@@ -147,7 +153,6 @@ function App() {
     isLoggedIn &&
       Promise.all([mainApi.getUserData(), moviesApi.getMovies()])
         .then(([userData, movies]) => {
-          // console.log(userData);
           setCurrentUser(userData);
           setMovies(movies);
         })
@@ -174,7 +179,13 @@ function App() {
     document.getElementById('about').scrollIntoView();
   }
 
-  
+  function handleClearTextErrorSubmit() {
+    setTextErrorSubmit('');
+  }
+
+  function handleCloseInfoTooltip() {
+    setIsInfoTooltipOpen(false);
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -245,6 +256,7 @@ function App() {
                 onLogin={cbLogin}
                 errorText={textErrorSubmit}
                 isLoading={isLoading}
+                onClearError={handleClearTextErrorSubmit}
               />
             }
           />
@@ -258,6 +270,7 @@ function App() {
                 onRegister={cbRegister}
                 errorText={textErrorSubmit}
                 isLoading={isLoading}
+                onClearError={handleClearTextErrorSubmit}
               />
             }
           />
@@ -275,6 +288,13 @@ function App() {
         </Routes>
 
         {isPathWithFooter && <Footer />}
+
+        <InfoTooltip
+          isOpen={isInfoTooltipOpen}
+          onClose={handleCloseInfoTooltip}
+          isValidAuth={isValidAuth}
+          textMessage={textMessageInfoTooltip}
+        />
       </div>
     </CurrentUserContext.Provider>
   );

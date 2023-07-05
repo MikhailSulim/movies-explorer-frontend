@@ -2,11 +2,12 @@ import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import useFormValidate from '../../hooks/useFormValidate';
 
-function SearchForm({}) {
+function SearchForm({onFindMovies}) {
   const { values, errors, onChange, resetValidation } = useFormValidate();
 
 function handleSubmit(e) {
   e.preventDefault();
+  onFindMovies(values.search);
 }
 
 

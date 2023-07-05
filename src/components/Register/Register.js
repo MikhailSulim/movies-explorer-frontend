@@ -6,7 +6,7 @@ import { useCallback } from 'react';
 import SubmitFormBtn from '../SubmitFormBtn/SubmitFormBtn';
 import useFormValidate from '../../hooks/useFormValidate';
 
-function Register({ onRegister, errorText, isLoading }) {
+function Register({ onRegister, errorText, isLoading, onClearError }) {
   const { values, errors, onChange, resetValidation, isFormValid } =
     useFormValidate();
 
@@ -27,7 +27,7 @@ function Register({ onRegister, errorText, isLoading }) {
         onSubmit={onSubmit}
       >
         <div className="register__up">
-          <Logo />
+          <Logo onClearError={onClearError}/>
           <h1 className="register__title">Добро пожаловать!</h1>
           <Input
             name="name"
@@ -39,7 +39,7 @@ function Register({ onRegister, errorText, isLoading }) {
             maxLength={30}
             onChange={onChange}
             value={values.name || ''}
-            pattern='[A-Za-zА-Яа-яЁё\-\s]{1,30}'
+            pattern='[A-Za-zА-Яа-яЁё\-\s]{2,30}'
             title='Имя должно содержит только латиницу, кириллицу, пробел или дефис'
           />
           <Input
@@ -50,7 +50,7 @@ function Register({ onRegister, errorText, isLoading }) {
             type="email"
             onChange={onChange}
             value={values.email || ''}
-            pattern='[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$'
+            pattern='[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$'
             title='Email должен быть в формате example@example.com'
           />
 
@@ -67,7 +67,7 @@ function Register({ onRegister, errorText, isLoading }) {
         </div>
         <div className="register__down">
           <span id="text-error" className="register__text-error">
-            {errorText}
+            {isFormValid || errorText}
           </span>
           <SubmitFormBtn
             btnText={`${isLoading ? 'Регистрация...' : 'Зарегистрироваться'}`}
@@ -75,7 +75,7 @@ function Register({ onRegister, errorText, isLoading }) {
           />
           <span className="register__text">
             Уже зарегистрированы?
-            <Link to="/signin" className="register__text-signin">
+            <Link to="/signin" className="register__text-signin" onClick={onClearError}>
               Войти
             </Link>
           </span>

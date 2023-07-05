@@ -6,7 +6,7 @@ import Logo from '../Logo/Logo';
 import useFormValidate from '../../hooks/useFormValidate';
 import SubmitFormBtn from '../SubmitFormBtn/SubmitFormBtn';
 
-function Login({ onLogin, errorText, isLoading }) {
+function Login({ onLogin, errorText, isLoading, onClearError }) {
   const { values, errors, onChange, resetValidation, isFormValid } =
     useFormValidate();
 
@@ -23,7 +23,7 @@ function Login({ onLogin, errorText, isLoading }) {
     <main className="login">
       <form className="login__form" name="login__form" onSubmit={onSubmit}>
         <div className="login__up">
-          <Logo />
+          <Logo onClearError={onClearError}/>
           <h1 className="login__title">Рады видеть!</h1>
           <Input
             name="email"
@@ -33,7 +33,7 @@ function Login({ onLogin, errorText, isLoading }) {
             error={errors.email || ''}
             onChange={onChange}
             value={values.email || ''}
-            pattern='[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$'
+            pattern='[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$'
             title='Email должен быть в формате example@example.com'
           />
           <Input
@@ -55,7 +55,7 @@ function Login({ onLogin, errorText, isLoading }) {
           />
           <span className="login__text">
             Ещё не зарегистрированы?
-            <Link to="/signup" className="login__text-signup">
+            <Link to="/signup" className="login__text-signup" onClick={onClearError}>
               Регистрация
             </Link>
           </span>

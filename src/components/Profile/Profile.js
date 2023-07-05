@@ -6,13 +6,18 @@ import useFormValidate from '../../hooks/useFormValidate';
 
 function Profile({ isLogged, onLogout, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);
-  const { values, onChange, resetValidation } = useFormValidate();
+  const regex_name = `^(?!(^${currentUser.name}$))([A-Za-zА-Яа-яЁё\\-\\s]{2,30})$`;
+  const regex_email = `^(?!(^${currentUser.email}$))([a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$)$`;
+  // const regex_email = '[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$';
+
+  const { values, errors, onChange, resetValidation, isFormValid } =
+    useFormValidate();
 
   useEffect(() => {
     resetValidation(
       { name: currentUser.name, email: currentUser.email },
       {},
-      true
+      false
     );
   }, [currentUser, resetValidation]);
 
@@ -33,13 +38,18 @@ function Profile({ isLogged, onLogout, onUpdateUser }) {
             <input
               id="input-name"
               name="name"
-              className="profile__input profile__input_type_name"
+              className={`profile__input profile__input_type_name ${
+                errors.name ? 'profile__input_type_error' : ''
+              }`}
               type="text"
               value={values.name || ''}
               minLength="2"
               maxLength="30"
               required
               onChange={onChange}
+              autoComplete="off"
+              pattern={regex_name}
+              title="Имя должно содержать только латиницу, кириллицу, пробел или дефис, а также должно отличаться от текущего"
             />
           </label>
           <label className="profile__label">
@@ -47,16 +57,25 @@ function Profile({ isLogged, onLogout, onUpdateUser }) {
             <input
               id="input-email"
               name="email"
-              className="profile__input profile__input_type_email"
+              className={`profile__input profile__input_type_email ${
+                errors.email ? 'profile__input_type_error' : ''
+              }`}
               type="email"
               required
               value={values.email || ''}
+              autoComplete="off"
               onChange={onChange}
+              pattern={regex_email}
+              title="Email должен быть в формате example@example.com, а также должен отличаться от текущего"
             />
           </label>
           <button
             type="submit"
-            className="profile__button profile__button_type_edit"
+            className={`${
+              isFormValid //&& !isSameUserData
+                ? 'profile__button profile__button_type_edit'
+                : 'profile__button profile__button_type_disable'
+            }`}
           >
             Редактировать
           </button>
