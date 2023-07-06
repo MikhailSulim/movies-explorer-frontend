@@ -40,7 +40,7 @@ function Register({ onRegister, errorText, isLoading, onClearError }) {
             onChange={onChange}
             value={values.name || ''}
             pattern='[A-Za-zА-Яа-яЁё\-\s]{2,30}'
-            title='Имя должно содержит только латиницу, кириллицу, пробел или дефис'
+            title='Имя должно содержать только латиницу, кириллицу, пробел или дефис'
           />
           <Input
             name="email"

@@ -187,6 +187,11 @@ function App() {
     setIsInfoTooltipOpen(false);
   }
 
+  /////////////////////////////////
+//  фильмы
+
+
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">

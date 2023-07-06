@@ -68,6 +68,46 @@ class MainApi {
       body: JSON.stringify({ name, email }),
     });
   }
+
+  saveMovie(movie) {
+    // функция сохранения выбранного фильма
+    return this._request('/movies', {
+      method: 'POST',
+      headers: this._headers,
+      credentials: this._credentials,
+      body: JSON.stringify({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: movie.image.url,
+        trailerLink: movie.trailerLink,
+        thumbnail: movie.image.formats.thumbnail.url,
+        movieId: movie.id,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+      }),
+    });
+  }
+
+  getSavedMovies() {
+    // функция получения сохранённых фильмов
+    return this._request('/movies', {
+      method: 'GET',
+      headers: this._headers,
+      credentials: this._credentials,
+    });
+  }
+
+  deleteMovie(movieId) {
+    // функция удаления фильма из сохранённых
+    return this._request(`/movies/${movieId}`, {
+      method: 'DELETE',
+      headers: this._headers,
+      credentials: this._credentials,
+    });
+  }
 }
 
 const mainApi = new MainApi({

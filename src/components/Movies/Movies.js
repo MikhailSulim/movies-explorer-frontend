@@ -5,6 +5,11 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
 function Movies({ isLoading, movies, onFindMovies }) {
+
+
+
+
+  
   return (
     <main className="movies-main">
       

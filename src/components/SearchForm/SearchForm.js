@@ -22,6 +22,7 @@ function handleSubmit(e) {
             type="text"
             placeholder="Фильм"
             required
+            autoComplete='off'
             onChange={onChange}
           />
           <button type="submit" className="search__button">

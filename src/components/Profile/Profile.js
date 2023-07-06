@@ -24,8 +24,8 @@ function Profile({ isLogged, onLogout, onUpdateUser }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    onUpdateUser({ name: values.name, email: values.email });
-    resetValidation();
+    onUpdateUser(values);
+    // resetValidation();
   }
 
   return (
@@ -72,7 +72,7 @@ function Profile({ isLogged, onLogout, onUpdateUser }) {
           <button
             type="submit"
             className={`${
-              isFormValid //&& !isSameUserData
+              isFormValid 
                 ? 'profile__button profile__button_type_edit'
                 : 'profile__button profile__button_type_disable'
             }`}
