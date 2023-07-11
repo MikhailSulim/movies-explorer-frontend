@@ -70,21 +70,18 @@ function SavedMovies({ savedMovies, onSave, onDelete, isLoading }) {
   };
 
   useEffect(() => {
-    setMoviesRequest(localStorage.getItem('savedMovieSearch'));
-    
     if (localStorage.getItem('shortSavedMovies') === 'true') {
       setShortMoviesToggle(true);
     } else {
       setShortMoviesToggle(false);
     }
-      const moviesList = filterMovies(
-        savedMovies,
-        moviesRequest,
-        shortMoviesToggle
-      );
-      setShowedMovies(moviesList);
+    const moviesList = filterMovies(
+      savedMovies,
+      moviesRequest,
+      shortMoviesToggle
+    );
+    setShowedMovies(moviesList);
   }, [savedMovies, shortMoviesToggle]);
-
 
   useEffect(() => {
     setFilteredMovies(savedMovies);
