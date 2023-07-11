@@ -1,6 +1,9 @@
 # Фронтенд часть дипломного проекта movies-explorer
 Дипломная работа выполнена в рамках обучения в ЯПрактикуме.
 
+## Ссылка на pull request
+https://github.com/MikhailSulim/movies-explorer-frontend/pull/2#issue-1799049622
+
 ## Ссылка на макет
 https://disk.yandex.ru/d/MoAGVurpy8NnMg
 
@@ -32,6 +35,12 @@ npm i
 npm run start
 ``` 
 
-## Адрес репозитория
+## Ссылки 
 [Ссылка на репозиторий](https://github.com/MikhailSulim/movies-explorer-frontend)
+
+IP 158.160.114.234
+
+Backend https://api.sulim.yp-diploma.nomoredomains.rocks
+
+Frontend https://sulim.yp-diploma.nomoredomains.rocks/
 
