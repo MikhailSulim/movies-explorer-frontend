@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
@@ -13,20 +13,15 @@ import Footer from '../Footer/Footer';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import { CurrentUserContext } from './../../contexts/CurrentUserContext';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
-import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
+import { MSG_ERROR_AUTH } from '../../utils/constants';
 
 function App() {
-  const ERR_MESSAGE = 'Что-то пошло не так! Попробуйте ещё раз.';
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [movies, setMovies] = useState([]);
-
-  // const [foundMovies, setFoundMovies] = useState([]);
-  const [initialMovies, setInitialMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
 
   const [currentUser, setCurrentUser] = useState({});
-  // const [userInfo, setUserInfo] = useState(null);
 
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [textMessageInfoTooltip, setTextMessageInfoTooltip] = useState('');
@@ -47,81 +42,6 @@ function App() {
   const isPathWithFooter = ['/', '/movies', '/saved-movies'].includes(pathname);
 
   // ----------------------- Авторизация ------------------------- //
-  function cbRegister({ name, email, password }) {
-    // регистрация
-    setIsLoading(true);
-    setTextErrorSubmit('');
-    mainApi
-      .register(name, email, password)
-      .then((res) => {
-        cbLogin({ email, password });
-      })
-      .catch((err) => {
-        setTextErrorSubmit(ERR_MESSAGE);
-        console.error(err);
-      })
-      .finally(() => {
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 1000);
-      });
-  }
-
-  function cbLogin({ email, password }) {
-    // авторизация
-    setIsLoading(true);
-    setTextErrorSubmit('');
-    mainApi
-      .authorize(email, password)
-      .then(() => {
-        setIsLoggedIn(true);
-        localStorage.setItem('isAuthorized', 'true');
-        navigate('/movies', { replace: true });
-      })
-      .catch((err) => {
-        setTextErrorSubmit(ERR_MESSAGE);
-        console.log(err);
-      })
-      .finally(() => {
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 1000);
-      });
-  }
-
-  function cbLogout() {
-    // выход из системы
-    mainApi
-      .signout()
-      .then(() => {
-        localStorage.removeItem('isAuthorized');
-        setIsLoggedIn(false);
-        navigate('/', { replace: true });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  function handleUpdateUser({ name, email }) {
-    // редактирование данных
-    setIsLoading(true);
-    mainApi
-      .setUserInfo(name, email)
-      .then((newUserData) => {
-        setCurrentUser(newUserData);
-        setTextMessageInfoTooltip('Профиль успешно отредактирован!');
-        setIsValidAuth(true);
-        setIsInfoTooltipOpen(true);
-      })
-      .catch((err) => {
-        console.error(err);
-        setIsValidAuth(false);
-        setTextMessageInfoTooltip(ERR_MESSAGE);
-        setIsInfoTooltipOpen(true);
-      });
-  }
-
   const checkToken = React.useCallback(() => {
     // если пользователь авторизован,
     // эта функция проверит, есть ли данные в req.user._id на сервере
@@ -140,57 +60,171 @@ function App() {
         .catch((err) => {
           console.error(err); // выведем ошибку в консоль
         })
-        .finally(() => {
-          // setIsLoading(false);
-        });
+        .finally(() => {});
     } else {
       setIsLoading(false);
     }
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     checkToken();
     isLoggedIn &&
-      Promise.all([mainApi.getUserData(), moviesApi.getMovies()])
-        .then(([userData, movies]) => {
+      Promise.all([mainApi.getUserData(), mainApi.getSavedMovies()])
+        .then(([userData, savedMovies]) => {
+          localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
           setCurrentUser(userData);
-          setMovies(movies);
+          setSavedMovies(savedMovies);
         })
         .catch((err) => {
           console.error(err);
         });
   }, [checkToken, isLoggedIn]);
 
-  ///////////////////////////////////
-
-  function handleNavigateToSignin() {
-    navigate('/signin');
-  }
-
-  function handleNavigateToSignup() {
-    navigate('/signup');
-  }
-
-  function handleNavigateToMain() {
-    navigate('/');
-  }
-
-  function handleNavigateToAbout() {
-    document.getElementById('about').scrollIntoView();
-  }
-
-  function handleClearTextErrorSubmit() {
+  const cbRegister = ({ name, email, password }) => {
+    // регистрация
+    setIsLoading(true);
     setTextErrorSubmit('');
-  }
+    mainApi
+      .register(name, email, password)
+      .then((res) => {
+        cbLogin({ email, password });
+      })
+      .catch((err) => {
+        setTextErrorSubmit(MSG_ERROR_AUTH);
+        console.error(err);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
+      });
+  };
 
-  function handleCloseInfoTooltip() {
+  const cbLogin = ({ email, password }) => {
+    // авторизация
+    setIsLoading(true);
+    setTextErrorSubmit('');
+    mainApi
+      .authorize(email, password)
+      .then(() => {
+        setIsLoggedIn(true);
+        localStorage.setItem('isAuthorized', 'true');
+        localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+
+        navigate('/movies', { replace: true });
+      })
+      .catch((err) => {
+        setTextErrorSubmit(MSG_ERROR_AUTH);
+        console.error(err);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
+      });
+  };
+
+  const cbLogout = () => {
+    // выход из системы
+    mainApi
+      .signout()
+      .then(() => {
+        localStorage.clear();
+        setCurrentUser({});
+        setSavedMovies([]);
+        setIsLoggedIn(false);
+        navigate('/', { replace: true });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const handleUpdateUser = ({ name, email }) => {
+    // редактирование данных
+    setIsLoading(true);
+    mainApi
+      .setUserInfo(name, email)
+      .then((newUserData) => {
+        setCurrentUser(newUserData);
+        setTextMessageInfoTooltip('Профиль успешно отредактирован!');
+        setIsValidAuth(true);
+        setIsInfoTooltipOpen(true);
+      })
+      .catch((err) => {
+        console.error(err);
+        setIsValidAuth(false);
+        setTextMessageInfoTooltip(MSG_ERROR_AUTH);
+        setIsInfoTooltipOpen(true);
+      });
+  };
+
+  const handleSaveMovie = (movie) => {
+    // функция добавления или исключения фильма из списка сохраненных
+
+    const handledMovie = savedMovies.find((item) => {
+      return item.movieId === movie.id;
+    });
+    const isLiked = Boolean(handledMovie);
+
+    if (isLiked) {
+      handleDeleteMovie(handledMovie);
+    } else {
+      mainApi
+        .saveMovie(movie)
+        .then((newSavedMovie) => {
+          setSavedMovies([...savedMovies, newSavedMovie]);
+          localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  };
+
+  const handleDeleteMovie = (movie) => {
+    // функция удаления фильма из списка сохранённых
+    setIsLoading(true);
+    mainApi
+      .deleteMovie(movie._id)
+      .then(() => {
+        const updatedSavedMovies = savedMovies.filter(
+          (item) => item._id !== movie._id
+        );
+        localStorage.setItem('savedMovies', JSON.stringify(updatedSavedMovies));
+        setSavedMovies(updatedSavedMovies);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const handleNavigateToSignin = () => {
+    navigate('/signin');
+  };
+
+  const handleNavigateToSignup = () => {
+    navigate('/signup');
+  };
+
+  const handleNavigateBack = () => {
+    navigate(-1);
+  };
+
+  const handleNavigateToAbout = () => {
+    document.getElementById('about').scrollIntoView();
+  };
+
+  const handleClearTextErrorSubmit = () => {
+    setTextErrorSubmit('');
+  };
+
+  const handleCloseInfoTooltip = () => {
     setIsInfoTooltipOpen(false);
-  }
-
-  /////////////////////////////////
-//  фильмы
-
-
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -211,16 +245,16 @@ function App() {
           />
 
           {/*отображается страница «Фильмы»*/}
-
-          {/* <Route path="/movies" element={<Movies isLoading={isLoading} />} /> */}
           <Route
             path="/movies"
             element={
               <ProtectedRouteElement
                 component={Movies}
                 isLoggedIn={isLoggedIn}
-                isLoading={isLoading}
-                movies={initialMovies}
+                onSave={handleSaveMovie}
+                onDelete={handleDeleteMovie}
+                savedMovies={savedMovies}
+                // isLoading={isLoading}
               />
             }
           />
@@ -228,18 +262,19 @@ function App() {
           {/*отображается страница «Сохранённые фильмы»*/}
           <Route
             path="/saved-movies"
-            // element={<SavedMovies isLoading={isLoading} />}
             element={
               <ProtectedRouteElement
                 component={SavedMovies}
                 isLoggedIn={isLoggedIn}
-                isLoading={isLoading}
+                savedMovies={savedMovies}
+                // isLoading={isLoading}
+                onSave={handleSaveMovie}
+                onDelete={handleDeleteMovie}
               />
             }
           />
 
           {/*отображается страница с профилем пользователя*/}
-          {/* <Route path="/profile" element={<Profile />} /> */}
           <Route
             path="/profile"
             element={
@@ -282,14 +317,13 @@ function App() {
 
           <Route
             path="*"
-            element={<NotFound onNavigateToMain={handleNavigateToMain} />}
+            element={
+              <NotFound
+                isLoggedIn={isLoggedIn}
+                onNavigateBack={handleNavigateBack}
+              />
+            }
           />
-
-          {/*Защищать маршруты авторизацией пока не требуется. Достаточно наладить
-        работу всех ссылок: нажатие на логотип ведёт на страницу «О проекте»;
-        нажатие на «Фильмы» — на роут /movies; нажатие на «Сохранённые фильмы» —
-        на роут /saved-movies; нажатие на «Регистрация», «Авторизация»,
-        «Аккаунт» — на соответствующие роуты /signup, /signin и /profile.*/}
         </Routes>
 
         {isPathWithFooter && <Footer />}

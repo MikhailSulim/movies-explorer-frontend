@@ -1,35 +1,55 @@
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import useFormValidate from '../../hooks/useFormValidate';
+import { useState, useEffect } from 'react';
 
-function SearchForm({onFindMovies}) {
-  const { values, errors, onChange, resetValidation } = useFormValidate();
+function SearchForm({
+  onFindMovies,
+  shortMoviesToggle,
+  onFilter,
+  requestValue,
+}) {
+  const [userRequest, setUserRequest] = useState('');
 
-function handleSubmit(e) {
-  e.preventDefault();
-  onFindMovies(values.search);
-}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onFindMovies(userRequest);
+  };
 
+  const onChange = (e) => {
+    setUserRequest(e.target.value);
+  };
+
+  useEffect(() => {
+    requestValue && setUserRequest(requestValue);
+  }, [requestValue]);
 
   return (
     <div className="search">
-      <form className="search__form" name="search__form" onSubmit={handleSubmit}>
+      <form
+        className="search__form"
+        name="search__form"
+        onSubmit={handleSubmit}
+      >
         <div className="search__field">
           <input
             className="search__input"
-            name='search'
-            id='search'
+            name="search"
+            id="search"
             type="text"
             placeholder="Фильм"
             required
-            autoComplete='off'
+            autoComplete="off"
             onChange={onChange}
+            value={userRequest || ''}
           />
           <button type="submit" className="search__button">
             Найти
           </button>
         </div>
-        <FilterCheckbox />
+        <FilterCheckbox
+          onFilter={onFilter}
+          shortMoviesToggle={shortMoviesToggle}
+        />
       </form>
     </div>
   );

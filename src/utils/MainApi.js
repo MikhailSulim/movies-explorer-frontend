@@ -1,5 +1,5 @@
 // Api для работы с данными пользователя
-import { MAIN_API_URL } from './constants.js';
+import { MAIN_API_URL, MOVIES_IMAGE_URL } from './constants.js';
 
 class MainApi {
   constructor({ serverUrl, headers, credentials }) {
@@ -81,12 +81,12 @@ class MainApi {
         duration: movie.duration,
         year: movie.year,
         description: movie.description,
-        image: movie.image.url,
+        image: `${MOVIES_IMAGE_URL}${movie.image.url}`,
         trailerLink: movie.trailerLink,
-        thumbnail: movie.image.formats.thumbnail.url,
+        thumbnail: `${MOVIES_IMAGE_URL}${movie.image.formats.thumbnail.url}`,
         movieId: movie.id,
-        nameRU: movie.nameRU,
-        nameEN: movie.nameEN,
+        nameRU: movie.nameRU || movie.nameEN,
+        nameEN: movie.nameEN || movie.nameRU,
       }),
     });
   }

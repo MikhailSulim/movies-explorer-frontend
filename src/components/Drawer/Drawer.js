@@ -18,6 +18,7 @@ function Drawer({ onClose }) {
             className={`drawer__link drawer__link-main ${
               pathname === '/' ? 'drawer__link-current' : ''
             }`}
+            onClick={onClose}
           >
             Главная
           </Link>
@@ -26,6 +27,7 @@ function Drawer({ onClose }) {
             className={`drawer__link drawer__link-movies ${
               pathname === '/movies' ? 'drawer__link-current' : ''
             }`}
+            onClick={onClose}
           >
             Фильмы
           </Link>
@@ -34,11 +36,12 @@ function Drawer({ onClose }) {
             className={`drawer__link drawer__link-saved-movies ${
               pathname === '/saved-movies' ? 'drawer__link-current' : ''
             }`}
+            onClick={onClose}
           >
             Сохранённые фильмы
           </Link>
         </div>
-        <Link to="/profile" className="header__btn-account">
+        <Link to="/profile" className="header__btn-account" onClick={onClose}>
           Аккаунт
         </Link>
       </div>

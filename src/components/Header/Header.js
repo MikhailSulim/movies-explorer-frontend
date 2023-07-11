@@ -37,16 +37,21 @@ function Header({ isLogged, onNavigateToSignin, onNavigateToSignup }) {
           </nav>
         ) : (
           <nav className="header__nav-auth">
-            
-              <button type="button" className="header__btn-signup" onClick={onNavigateToSignup}>
-                Регистрация
-              </button>
-            
-            
-              <button type="button" className="header__btn-signin" onClick={onNavigateToSignin}>
-                Войти
-              </button>
-            
+            <button
+              type="button"
+              className="header__btn-signup"
+              onClick={onNavigateToSignup}
+            >
+              Регистрация
+            </button>
+
+            <button
+              type="button"
+              className="header__btn-signin"
+              onClick={onNavigateToSignin}
+            >
+              Войти
+            </button>
           </nav>
         )}
       </div>

@@ -21,12 +21,12 @@ function Profile({ isLogged, onLogout, onUpdateUser }) {
     );
   }, [currentUser, resetValidation]);
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     onUpdateUser(values);
     // resetValidation();
-  }
+  };
 
   return (
     <main className="profile">
@@ -72,7 +72,7 @@ function Profile({ isLogged, onLogout, onUpdateUser }) {
           <button
             type="submit"
             className={`${
-              isFormValid 
+              isFormValid
                 ? 'profile__button profile__button_type_edit'
                 : 'profile__button profile__button_type_disable'
             }`}

@@ -27,7 +27,7 @@ function Register({ onRegister, errorText, isLoading, onClearError }) {
         onSubmit={onSubmit}
       >
         <div className="register__up">
-          <Logo onClearError={onClearError}/>
+          <Logo onClearError={onClearError} />
           <h1 className="register__title">Добро пожаловать!</h1>
           <Input
             name="name"
@@ -39,8 +39,8 @@ function Register({ onRegister, errorText, isLoading, onClearError }) {
             maxLength={30}
             onChange={onChange}
             value={values.name || ''}
-            pattern='[A-Za-zА-Яа-яЁё\-\s]{2,30}'
-            title='Имя должно содержать только латиницу, кириллицу, пробел или дефис'
+            pattern="[A-Za-zА-Яа-яЁё\-\s]{2,30}"
+            title="Имя должно содержать только латиницу, кириллицу, пробел или дефис"
           />
           <Input
             name="email"
@@ -50,8 +50,8 @@ function Register({ onRegister, errorText, isLoading, onClearError }) {
             type="email"
             onChange={onChange}
             value={values.email || ''}
-            pattern='[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$'
-            title='Email должен быть в формате example@example.com'
+            pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+            title="Email должен быть в формате example@example.com"
           />
 
           <Input
@@ -75,7 +75,11 @@ function Register({ onRegister, errorText, isLoading, onClearError }) {
           />
           <span className="register__text">
             Уже зарегистрированы?
-            <Link to="/signin" className="register__text-signin" onClick={onClearError}>
+            <Link
+              to="/signin"
+              className="register__text-signin"
+              onClick={onClearError}
+            >
               Войти
             </Link>
           </span>
@@ -86,4 +90,3 @@ function Register({ onRegister, errorText, isLoading, onClearError }) {
 }
 
 export default Register;
-
