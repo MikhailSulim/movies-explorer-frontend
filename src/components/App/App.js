@@ -63,6 +63,7 @@ function App() {
         .finally(() => {});
     } else {
       setIsLoading(false);
+      // localStorage.clear();
     }
   }, []);
 
@@ -78,6 +79,7 @@ function App() {
         .catch((err) => {
           console.error(err);
         });
+    if (!isLoggedIn) localStorage.clear();
   }, [checkToken, isLoggedIn]);
 
   const cbRegister = ({ name, email, password }) => {
@@ -254,8 +256,11 @@ function App() {
                 onSave={handleSaveMovie}
                 onDelete={handleDeleteMovie}
                 savedMovies={savedMovies}
+                setIsInfoTooltipOpen={setIsInfoTooltipOpen}
+                setTextMessageInfoTooltip={setTextMessageInfoTooltip}
+                setIsValidAuth={setIsValidAuth}
                 // isLoading={isLoading}
-              />
+                />
             }
           />
 
@@ -270,6 +275,9 @@ function App() {
                 // isLoading={isLoading}
                 onSave={handleSaveMovie}
                 onDelete={handleDeleteMovie}
+                setIsInfoTooltipOpen={setIsInfoTooltipOpen}
+                setTextMessageInfoTooltip={setTextMessageInfoTooltip}
+                setIsValidAuth={setIsValidAuth}
               />
             }
           />
@@ -319,7 +327,7 @@ function App() {
             path="*"
             element={
               <NotFound
-                isLoggedIn={isLoggedIn}
+                // isLoggedIn={isLoggedIn}
                 onNavigateBack={handleNavigateBack}
               />
             }

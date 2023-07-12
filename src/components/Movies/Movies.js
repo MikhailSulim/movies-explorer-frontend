@@ -7,7 +7,14 @@ import moviesApi from '../../utils/MoviesApi';
 
 import { MSG_NOT_FOUND, MSG_SERVER_ERR } from '../../utils/constants';
 
-function Movies({ onSave, onDelete, savedMovies }) {
+function Movies({
+  onSave,
+  onDelete,
+  savedMovies,
+  setIsInfoTooltipOpen,
+  setTextMessageInfoTooltip,
+  setIsValidAuth,
+}) {
   const [allMovies, setAllMovies] = useState([]); // все фильмы из базы
   const [shortMoviesToggle, setShortMoviesToggle] = useState(false); // положение переключателя короткометражек
 
@@ -53,6 +60,13 @@ function Movies({ onSave, onDelete, savedMovies }) {
   };
 
   const handleSearchSubmit = (inputValue) => {
+    if (inputValue.length === 0) {
+      setTextMessageInfoTooltip('Нужно ввести ключевое слово');
+      setIsInfoTooltipOpen(true);
+      setIsValidAuth(false);
+      return;
+    }
+
     localStorage.setItem('movieSearch', inputValue);
     setMoviesRequest(inputValue);
     localStorage.setItem('shortMovies', shortMoviesToggle);

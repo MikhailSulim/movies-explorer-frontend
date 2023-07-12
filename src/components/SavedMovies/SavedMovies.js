@@ -5,7 +5,15 @@ import Preloader from '../Preloader/Preloader';
 import { useEffect, useState } from 'react';
 import { MSG_NOT_FOUND } from '../../utils/constants';
 
-function SavedMovies({ savedMovies, onSave, onDelete, isLoading }) {
+function SavedMovies({
+  savedMovies,
+  onSave,
+  onDelete,
+  isLoading,
+  setIsInfoTooltipOpen,
+  setTextMessageInfoTooltip,
+  setIsValidAuth,
+}) {
   const [shortMoviesToggle, setShortMoviesToggle] = useState(false); // положение переключателя короткометражек
   const [showedMovies, setShowedMovies] = useState(savedMovies);
   const [filteredMovies, setFilteredMovies] = useState(showedMovies);
@@ -35,6 +43,13 @@ function SavedMovies({ savedMovies, onSave, onDelete, isLoading }) {
   }
 
   const handleSearchSubmit = (inputValue) => {
+    if (inputValue.length === 0) {
+      setTextMessageInfoTooltip('Нужно ввести ключевое слово');
+      setIsInfoTooltipOpen(true);
+      setIsValidAuth(false);
+      return;
+    }
+
     localStorage.setItem('savedMovieSearch', inputValue);
     localStorage.setItem('shortSavedMovies', shortMoviesToggle);
     setMoviesRequest(inputValue);

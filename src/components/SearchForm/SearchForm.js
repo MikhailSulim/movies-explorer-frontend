@@ -29,6 +29,7 @@ function SearchForm({
         className="search__form"
         name="search__form"
         onSubmit={handleSubmit}
+        noValidate
       >
         <div className="search__field">
           <input
