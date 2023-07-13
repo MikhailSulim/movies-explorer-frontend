@@ -6,8 +6,10 @@ import useFormValidate from '../../hooks/useFormValidate';
 
 function Profile({ isLogged, onLogout, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);
-  const regex_name = `^(?!(^${currentUser.name}$))([A-Za-zА-Яа-яЁё\\-\\s]{2,30})$`;
-  const regex_email = `^(?!(^${currentUser.email}$))([a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$)$`;
+  // const regex_name = `^(?!(^${currentUser.name}$))([A-Za-zА-Яа-яЁё\\-\\s]{2,30})$`;
+  // const regex_email = `^(?!(^${currentUser.email}$))([a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$)$`;
+  const regex_name = `([A-Za-zА-Яа-яЁё\\-\\s]{2,30})`;
+  const regex_email = `([a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$)`;
   // const regex_email = '[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$';
 
   const { values, errors, onChange, resetValidation, isFormValid } =
@@ -27,6 +29,9 @@ function Profile({ isLogged, onLogout, onUpdateUser }) {
     onUpdateUser(values);
     // resetValidation();
   };
+
+  const isSameValues =
+    currentUser.name === values.name && currentUser.email === values.email;
 
   return (
     <main className="profile">
@@ -72,7 +77,7 @@ function Profile({ isLogged, onLogout, onUpdateUser }) {
           <button
             type="submit"
             className={`${
-              isFormValid
+              isFormValid && !isSameValues
                 ? 'profile__button profile__button_type_edit'
                 : 'profile__button profile__button_type_disable'
             }`}
