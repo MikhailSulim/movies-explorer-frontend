@@ -1,18 +1,23 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Navigation.css';
 
 function Navigation() {
   return (
     <div className="navigation">
-      <Link to="/movies" className="navigation__link navigation__link_movies">
+      <NavLink
+        to="/movies"
+        className="navigation__link"
+        style={({ isActive }) => ({ fontWeight: isActive ? '500' : '400' })}
+      >
         Фильмы
-      </Link>
-      <Link
+      </NavLink>
+      <NavLink
         to="/saved-movies"
-        className="navigation__link navigation__link_saved-movies"
+        className="navigation__link "
+        style={({ isActive }) => ({ fontWeight: isActive ? '500' : '400' })}
       >
         Сохранённые фильмы
-      </Link>
+      </NavLink>
     </div>
   );
 }

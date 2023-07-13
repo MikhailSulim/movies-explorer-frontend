@@ -1,4 +1,10 @@
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import Profile from '../Profile/Profile';
@@ -42,45 +48,28 @@ function App() {
   const isPathWithFooter = ['/', '/movies', '/saved-movies'].includes(pathname);
 
   // ----------------------- Авторизация ------------------------- //
-  const checkToken = React.useCallback(() => {
-    // если пользователь авторизован,
-    // эта функция проверит, есть ли данные в req.user._id на сервере
+
+
+  const checkToken = () => {
     const isAuthorized = localStorage.getItem('isAuthorized');
 
     if (isAuthorized) {
-      // проверим, есть ли данные в req.user._id
-      mainApi
-        .getUserData()
-        .then((userData) => {
-          if (userData.email) {
-            // авторизуем пользователя
-            setIsLoggedIn(true);
-          }
-        })
-        .catch((err) => {
-          console.error(err); // выведем ошибку в консоль
-        })
-        .finally(() => {});
-    } else {
-      setIsLoading(false);
-      // localStorage.clear();
-    }
-  }, []);
-
-  useEffect(() => {
-    checkToken();
-    isLoggedIn &&
       Promise.all([mainApi.getUserData(), mainApi.getSavedMovies()])
         .then(([userData, savedMovies]) => {
           localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
           setCurrentUser(userData);
+          setIsLoggedIn(true);
           setSavedMovies(savedMovies);
         })
         .catch((err) => {
           console.error(err);
         });
-    if (!isLoggedIn) localStorage.clear();
-  }, [checkToken, isLoggedIn]);
+    }
+  };
+
+  useEffect(() => {
+    checkToken();
+  }, [isLoggedIn]);
 
   const cbRegister = ({ name, email, password }) => {
     // регистрация
@@ -260,7 +249,7 @@ function App() {
                 setTextMessageInfoTooltip={setTextMessageInfoTooltip}
                 setIsValidAuth={setIsValidAuth}
                 // isLoading={isLoading}
-                />
+              />
             }
           />
 
@@ -299,13 +288,17 @@ function App() {
           <Route
             path="/signin"
             element={
-              <Login
-                isLoggedIn={isLoggedIn}
-                onLogin={cbLogin}
-                errorText={textErrorSubmit}
-                isLoading={isLoading}
-                onClearError={handleClearTextErrorSubmit}
-              />
+              isLoggedIn ? (
+                <Navigate to="/" />
+              ) : (
+                <Login
+                  // isLoggedIn={isLoggedIn}
+                  onLogin={cbLogin}
+                  errorText={textErrorSubmit}
+                  isLoading={isLoading}
+                  onClearError={handleClearTextErrorSubmit}
+                />
+              )
             }
           />
 
@@ -313,13 +306,17 @@ function App() {
           <Route
             path="/signup"
             element={
-              <Register
-                isLoggedIn={isLoggedIn}
-                onRegister={cbRegister}
-                errorText={textErrorSubmit}
-                isLoading={isLoading}
-                onClearError={handleClearTextErrorSubmit}
-              />
+              isLoggedIn ? (
+                <Navigate to="/" />
+              ) : (
+                <Register
+                  // isLoggedIn={isLoggedIn}
+                  onRegister={cbRegister}
+                  errorText={textErrorSubmit}
+                  isLoading={isLoading}
+                  onClearError={handleClearTextErrorSubmit}
+                />
+              )
             }
           />
 
@@ -327,7 +324,7 @@ function App() {
             path="*"
             element={
               <NotFound
-                // isLoggedIn={isLoggedIn}
+                isLoggedIn={isLoggedIn}
                 onNavigateBack={handleNavigateBack}
               />
             }
