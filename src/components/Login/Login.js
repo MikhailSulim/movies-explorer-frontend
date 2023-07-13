@@ -14,9 +14,9 @@ function Login({ onLogin, errorText, isLoading, onClearError }) {
     (e) => {
       e.preventDefault();
       onLogin(values);
-      resetValidation();
+      // resetValidation();
     },
-    [onLogin, resetValidation, values]
+    [onLogin, values]
   );
 
   return (
@@ -35,6 +35,7 @@ function Login({ onLogin, errorText, isLoading, onClearError }) {
             value={values.email || ''}
             pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
             title="Email должен быть в формате example@example.com"
+            disabled={isLoading} 
           />
           <Input
             name="password"
@@ -45,13 +46,15 @@ function Login({ onLogin, errorText, isLoading, onClearError }) {
             minLength={8}
             onChange={onChange}
             value={values.password || ''}
+            disabled={isLoading} 
           />
         </div>
         <div className="login__down">
           <span className="register__text-error">{errorText}</span>
           <SubmitFormBtn
             btnText={`${isLoading ? 'Авторизация...' : 'Войти'}`}
-            isEnable={isFormValid}
+            isEnable={isFormValid && !isLoading}
+            
           />
           <span className="login__text">
             Ещё не зарегистрированы?

@@ -1,7 +1,7 @@
 import './NotFound.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-function NotFound({ onNavigateBack }) {
+function NotFound() {
   const navigate = useNavigate();
   return (
     <main className="not-found">
@@ -11,7 +11,7 @@ function NotFound({ onNavigateBack }) {
         <NavLink 
           // type="button"
           className="not-found__link"
-          onClick={() => navigate(-1)}
+          onClick={() => navigate(-2)}
         >
           Назад
         </NavLink>

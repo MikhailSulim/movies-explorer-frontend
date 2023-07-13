@@ -60,6 +60,7 @@ function App() {
           setCurrentUser(userData);
           setIsLoggedIn(true);
           setSavedMovies(savedMovies);
+          navigate(pathname);
         })
         .catch((err) => {
           console.error(err);
@@ -201,9 +202,6 @@ function App() {
     navigate('/signup');
   };
 
-  const handleNavigateBack = () => {
-    navigate(-1);
-  };
 
   const handleNavigateToAbout = () => {
     document.getElementById('about').scrollIntoView();
@@ -232,7 +230,7 @@ function App() {
           {/*отображается страница «О проекте»*/}
           <Route
             path="/"
-            element={<Main onNavigateToAbout={handleNavigateToAbout} />}
+            element={<Main isLoggedIn={isLoggedIn} onNavigateToAbout={handleNavigateToAbout} />}
           />
 
           {/*отображается страница «Фильмы»*/}
@@ -310,7 +308,7 @@ function App() {
                 <Navigate to="/" />
               ) : (
                 <Register
-                  // isLoggedIn={isLoggedIn}
+                  isLoggedIn={isLoggedIn}
                   onRegister={cbRegister}
                   errorText={textErrorSubmit}
                   isLoading={isLoading}
@@ -325,7 +323,6 @@ function App() {
             element={
               <NotFound
                 isLoggedIn={isLoggedIn}
-                onNavigateBack={handleNavigateBack}
               />
             }
           />

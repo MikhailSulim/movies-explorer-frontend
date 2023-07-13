@@ -14,9 +14,9 @@ function Register({ onRegister, errorText, isLoading, onClearError }) {
     (e) => {
       e.preventDefault();
       onRegister(values);
-      resetValidation();
+      // resetValidation();
     },
-    [onRegister, resetValidation, values]
+    [onRegister, values]
   );
 
   return (
@@ -41,6 +41,7 @@ function Register({ onRegister, errorText, isLoading, onClearError }) {
             value={values.name || ''}
             pattern="[A-Za-zА-Яа-яЁё\-\s]{2,30}"
             title="Имя должно содержать только латиницу, кириллицу, пробел или дефис"
+            disabled={isLoading} 
           />
           <Input
             name="email"
@@ -52,6 +53,7 @@ function Register({ onRegister, errorText, isLoading, onClearError }) {
             value={values.email || ''}
             pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
             title="Email должен быть в формате example@example.com"
+            disabled={isLoading} 
           />
 
           <Input
@@ -63,6 +65,7 @@ function Register({ onRegister, errorText, isLoading, onClearError }) {
             minLength={8}
             onChange={onChange}
             value={values.password || ''}
+            disabled={isLoading} 
           />
         </div>
         <div className="register__down">
@@ -71,7 +74,7 @@ function Register({ onRegister, errorText, isLoading, onClearError }) {
           </span>
           <SubmitFormBtn
             btnText={`${isLoading ? 'Регистрация...' : 'Зарегистрироваться'}`}
-            isEnable={isFormValid}
+            isEnable={isFormValid && !isLoading}
           />
           <span className="register__text">
             Уже зарегистрированы?
