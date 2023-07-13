@@ -1,0 +1,34 @@
+.submit-form-btn {
+  background-color: #4285f4;
+  height: 45px;
+  border-radius: 3px;
+  margin: 10px 0 16px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.submit-form-btn_type_disable {
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid #fff;
+  opacity: 0.3;
+  cursor: default;
+}
+
+.lsubmit-form-btn:hover {
+  background-color: #3ddc84;
+}
+
+@media screen and (max-width: 570px) {
+  .submit-form-btn {
+    margin: 8px 0 13px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

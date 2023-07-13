@@ -14,6 +14,7 @@ function Input({ name, label, error, isValid, type, ...props }) {
         name={name}
         type={type}
         required
+        autoComplete='off'
         {...props}
       />
       <span className={`input__error input__error_type_${name}`}>{error}</span>

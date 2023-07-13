@@ -6,21 +6,3 @@
   flex-direction: column;
   justify-content: center;
 }
-
-.saved-movies-list-space {
-  max-width: 1280px;
-  width: 100%;
-  min-height: 107px;
-}
-
-@media screen and (max-width: 768px) {
-  .saved-movies-list-space {
-    margin: 0 auto 80px;
-  }
-}
-
-@media screen and (max-width: 570px) {
-  .saved-movies-list-space {
-    margin: 0 auto 80px;
-  }
-}
