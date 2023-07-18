@@ -1,9 +1,7 @@
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import './Drawer.css';
 
 function Drawer({ onClose }) {
-  const { pathname } = useLocation();
-
   return (
     <div className="drawer__overlay">
       <div className="drawer__body">
@@ -13,32 +11,41 @@ function Drawer({ onClose }) {
           onClick={onClose}
         ></button>
         <div className="drawer__link-box">
-          <Link
+          <NavLink
             to="/"
-            className={`drawer__link drawer__link-main ${
-              pathname === '/' ? 'drawer__link-current' : ''
-            }`}
+            className={({ isActive }) =>
+              isActive
+                ? 'drawer__link drawer__link-main drawer__link-current'
+                : 'drawer__link drawer__link-main'
+            }
+            onClick={onClose}
           >
             Главная
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/movies"
-            className={`drawer__link drawer__link-movies ${
-              pathname === '/movies' ? 'drawer__link-current' : ''
-            }`}
+            className={({ isActive }) =>
+              isActive
+                ? 'drawer__link drawer__link-movies drawer__link-current'
+                : 'drawer__link drawer__link-movies'
+            }
+            onClick={onClose}
           >
             Фильмы
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/saved-movies"
-            className={`drawer__link drawer__link-saved-movies ${
-              pathname === '/saved-movies' ? 'drawer__link-current' : ''
-            }`}
+            className={({ isActive }) =>
+              isActive
+                ? 'drawer__link drawer__link-saved-movies drawer__link-current'
+                : 'drawer__link drawer__link-saved-movies'
+            }
+            onClick={onClose}
           >
             Сохранённые фильмы
-          </Link>
+          </NavLink>
         </div>
-        <Link to="/profile" className="header__btn-account">
+        <Link to="/profile" className="header__btn-account" onClick={onClose}>
           Аккаунт
         </Link>
       </div>

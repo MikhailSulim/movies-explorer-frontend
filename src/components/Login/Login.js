@@ -1,42 +1,73 @@
 import './Login.css';
+import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../Input/Input';
 import Logo from '../Logo/Logo';
+import useFormValidate from '../../hooks/useFormValidate';
+import SubmitFormBtn from '../SubmitFormBtn/SubmitFormBtn';
 
-function Login() {
+function Login({ onLogin, errorText, isLoading, onClearError }) {
+  const { values, errors, onChange, resetValidation, isFormValid } =
+    useFormValidate();
+
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      onLogin(values);
+      // resetValidation();
+    },
+    [onLogin, values]
+  );
+
   return (
     <main className="login">
-      <section className="login__container">
-        <Logo />
-        <h1 className="login__title">Рады видеть!</h1>
-        <form className="login__form">
+      <form className="login__form" name="login__form" onSubmit={onSubmit}>
+        <div className="login__up">
+          <Logo onClearError={onClearError} />
+          <h1 className="login__title">Рады видеть!</h1>
           <Input
             name="email"
             label="E-mail"
-            isValid={true}
+            isValid={!errors.email}
             type="email"
-            error=""
+            error={errors.email || ''}
+            onChange={onChange}
+            value={values.email || ''}
+            pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+            title="Email должен быть в формате example@example.com"
+            disabled={isLoading} 
           />
           <Input
             name="password"
             label="Пароль"
-            isValid={true}
+            isValid={!errors.password}
             type="password"
-            error=""
+            error={errors.password || ''}
             minLength={8}
+            onChange={onChange}
+            value={values.password || ''}
+            disabled={isLoading} 
           />
-
-          <button type="submit" className="login__button">
-            Войти
-          </button>
-        </form>
-        <span className="login__text">
-          Ещё не зарегистрированы?
-          <Link to="/signup" className="login__text-signup">
-            Регистрация
-          </Link>
-        </span>
-      </section>
+        </div>
+        <div className="login__down">
+          <span className="register__text-error">{errorText}</span>
+          <SubmitFormBtn
+            btnText={`${isLoading ? 'Авторизация...' : 'Войти'}`}
+            isEnable={isFormValid && !isLoading}
+            
+          />
+          <span className="login__text">
+            Ещё не зарегистрированы?
+            <Link
+              to="/signup"
+              className="login__text-signup"
+              onClick={onClearError}
+            >
+              Регистрация
+            </Link>
+          </span>
+        </div>
+      </form>
     </main>
   );
 }
